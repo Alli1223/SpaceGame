@@ -76,7 +76,7 @@ void SpaceGame::run()
 
 	Oxygen oxygen;
 	Fire fire;
-	PlayerInteraction itemcontroller;
+	PlayerInteraction playerInteraction;
 	MainCharacter characterOne;
 	NPC NpcOne;
 	Cell cell;
@@ -85,6 +85,7 @@ void SpaceGame::run()
 	TraversePath traversepath;
 	ObjectiveManager objectivemanager;
 	ToolBar toolbar;
+	
 
 	//Character needs a pointer to the room to get the state
 	characterOne.currentRoom = std::make_shared<Level>(room);
@@ -165,8 +166,8 @@ void SpaceGame::run()
 
 
 		//opens the door when a player goes through
-		itemcontroller.Interaction(room, characterOne, oxygen);
-		itemcontroller.Interaction(room, NpcOne, oxygen);
+		playerInteraction.Interaction(room, characterOne, oxygen);
+		playerInteraction.Interaction(room, NpcOne, oxygen);
 
 
 
@@ -389,13 +390,21 @@ void SpaceGame::run()
 		}
 
 		//Renders the toolbar
-		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
-		toolbar.ToolBarFunctionality(room, designroom, mouse_X, mouse_Y);
-		Hydroponics hydroponicsOne;
-		if(toolbar.getToolbarSelection() == 3)
-			hydroponicsOne.spawnItem(renderer, mouse_X, mouse_Y);
-
 		
+		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
+		toolbar.ToolBarFunctionality(room, designroom, renderer, mouse_X, mouse_Y);
+		
+		Items items;
+		
+		
+		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbar.getToolbarSelection() == 4)
+		{
+			Hydroponics hydro;
+			hydro.spawnItem(renderer, room, hydro, mouse_X, mouse_Y);
+			
+		}
+		items.renderItems(renderer);
+
 
 		// If the character has died the game over screen is displayed
 		if (!characterOne.isAlive)

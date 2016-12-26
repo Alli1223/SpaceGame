@@ -81,7 +81,7 @@ public:
 
 private:
 	//! Integers for the character's X and Y position
-	int x = 5, y = 5;
+	int x = windowWidth / 2; int y = windowHeight / 2;
 	//! Integer for the character's size when rendered
 	int size = 25;
 	//! Integer for the characters current speed

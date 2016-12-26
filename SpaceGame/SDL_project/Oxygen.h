@@ -31,7 +31,7 @@ public:
 	std::vector<Point> Oxygen::getNeighbourCells(Point point, Level& grid);
 
 	//! oxygen spread rate
-	int oxygenSpreadRate = 5;
+	int oxygenSpreadRate = 10;
 
 	//! Initialising cellX and cellY for cell loop
 	int cellX, cellY;

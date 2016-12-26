@@ -7,15 +7,20 @@ public:
 	Hydroponics();
 	~Hydroponics();
 
+	void Hydroponics::renderItems(SDL_Renderer* renderer);
+
 	bool isProducingOxygen = true;
+	bool isProducingFood = true;
+	bool isHydroponics = true;
 
 	//! Texture for hydroponics
 	Texture hydroponicsTexture;
 
-	void spawnItem(SDL_Renderer* renderer, int x, int y);
+	void spawnItem(SDL_Renderer* renderer, Level& level, Hydroponics& hydroponics, int x, int y);
 
 private:
 
+	int x; int y;
 	int width = 50;
 	int height = 100;
 

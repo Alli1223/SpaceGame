@@ -2,6 +2,8 @@
 #include "GUI.h"
 #include "Level.h"
 #include "RoomDesign.h"
+#include "Hydroponics.h"
+
 class ToolBar : public GUI
 {
 public:
@@ -11,7 +13,7 @@ public:
 	//! Function that renders the toolbar
 	void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW_HEIGHT, int mouseX, int mouseY);
 
-	void ToolBar::ToolBarFunctionality(Level& room, RoomDesign& designroom, int mouseX, int mouseY);
+	void ToolBar::ToolBarFunctionality(Level& room, RoomDesign& designroom,SDL_Renderer* renderer, int mouseX, int mouseY);
 
 	//! The getters and setters for the toolbar selection
 	int getToolbarSelection() const { return toolbarSelection; }
@@ -27,10 +29,21 @@ public:
 	Texture emptyCellIcon;
 	//! Is the texture for the door
 	Texture DoorTexture;
+	//! Is the texture for the door
+	Texture HydroponicsIconTexture;
 
 
 	int toolbarIconSize = 50;
+	int mouseOverSizeIncrease = 10;
 	int numberOfToolbarIcons = 0;
+
+	int numberOfItem1 = 5;
+	int numberOfItem2 = 5;
+	int numberOfItem3 = 5;
+	int numberOfItem4 = 50;
+
+
+
 
 private:
 	int toolbarSelection = 1;

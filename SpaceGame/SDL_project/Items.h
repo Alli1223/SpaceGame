@@ -10,6 +10,13 @@ public:
 	//! Destructor
 	~Items();
 
+	void Items::renderItems(SDL_Renderer* renderer);
+
+	std::vector<Items> allHydroponicsFarms;
+
+	//! Texture for hydroponics
+	Texture hydroponicsTexture;
+
 	int getX() { return x; }
 	int setX(int newX) {return x = newX;}
 
@@ -29,10 +36,10 @@ public:
 	
 
 private:
-	int x = 10; int y = 10;
+	int x; int y;
 
 	int width = level.getCellSize(); int height = level.getCellSize();
 
-	float health;
+	int health = 100;
 };
 
