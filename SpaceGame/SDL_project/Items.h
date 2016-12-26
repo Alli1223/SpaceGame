@@ -10,13 +10,6 @@ public:
 	//! Destructor
 	~Items();
 
-	void Items::renderItems(SDL_Renderer* renderer);
-
-	std::vector<Items> allHydroponicsFarms;
-
-	//! Texture for hydroponics
-	Texture hydroponicsTexture;
-
 	int getX() { return x; }
 	int setX(int newX) {return x = newX;}
 

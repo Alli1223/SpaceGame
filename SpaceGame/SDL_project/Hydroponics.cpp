@@ -12,8 +12,9 @@ Hydroponics::~Hydroponics()
 {
 }
 
-void Hydroponics::spawnItem(SDL_Renderer* renderer, Level& level, Hydroponics& hydroponics, int x, int y)
+void Hydroponics::spawnItem(SDL_Renderer* renderer, Level& level, std::vector<Hydroponics>& allHydroponicsFarms, int x, int y)
 {
+	Hydroponics hydroponics;
 	int xPos = x; int yPos = y;
 	hydroponicsTexture.render(renderer, xPos, yPos, getwidth(), getheight());
 	hydroponics.setX(x);
@@ -25,10 +26,10 @@ void Hydroponics::spawnItem(SDL_Renderer* renderer, Level& level, Hydroponics& h
 	allHydroponicsFarms.push_back(hydroponics);
 }
 
-void  Hydroponics::renderItems(SDL_Renderer* renderer)
+void  Hydroponics::renderItems(SDL_Renderer* renderer, std::vector<Hydroponics>& allHydroponicsFarms)
 {
 	for (int iter = 0; iter < allHydroponicsFarms.size(); iter++)
 	{
-		hydroponicsTexture.render(renderer, allHydroponicsFarms[iter].getX() / 25, allHydroponicsFarms[iter].getY() / 25, allHydroponicsFarms[iter].getwidth(), allHydroponicsFarms[iter].getheight());
+		hydroponicsTexture.render(renderer, allHydroponicsFarms[iter].getX(), allHydroponicsFarms[iter].getY(), allHydroponicsFarms[iter].getwidth(), allHydroponicsFarms[iter].getheight());
 	}
 }

@@ -41,6 +41,9 @@ public:
 	//! Main Run loop
 	void run();
 
+	//! Removes all the data from stored vectors
+	void SpaceGame::deleteVectors();
+
 	GameSettings gameSettings;
 
 	
@@ -49,6 +52,9 @@ public:
 
 	//! Conains the list of nodes that makes the path
 	std::vector<Point> path;
+	
+	//! Contains a list of all the hydroponic farms
+	std::vector<Hydroponics> allHydroponicsFarms;
 
 	//! The window width 
 	int WINDOW_WIDTH = gameSettings.WINDOW_WIDTH;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Cell.h"
+
 //! This class generates the base of the level 
 /*!
 This class creates a vector of vector of shared pointers to cells
@@ -21,13 +22,15 @@ public:
 	//! The base grid that contains the cells
 	std::vector<std::vector<std::shared_ptr<Cell>>> grid;
 
+	
+
 	//! Fills grid with vectors of shared pointers to cells
 	void makeGrid(int Window_Width, int Window_Height);
 
 
 protected:
 	//! The size that the cell will be rendered at
-	int cellSize = 25;
+	int cellSize = 50;
 	int levelWidth, levelHeight;
 };
 

@@ -394,25 +394,25 @@ void SpaceGame::run()
 		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
 		toolbar.ToolBarFunctionality(room, designroom, renderer, mouse_X, mouse_Y);
 		
-		Items items;
 		
+		Items items;
+		Hydroponics hydroponics;
 		
 		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbar.getToolbarSelection() == 4)
 		{
-			Hydroponics hydro;
-			hydro.spawnItem(renderer, room, hydro, mouse_X, mouse_Y);
-			
+			if(room.grid[mouse_X / cellSize][mouse_Y/cellSize]->isRoom)
+				hydroponics.spawnItem(renderer, room, allHydroponicsFarms, mouse_X, mouse_Y);
 		}
-		items.renderItems(renderer);
-
+		// Render the vector of hydroponics
+		hydroponics.renderItems(renderer, allHydroponicsFarms);
 
 		// If the character has died the game over screen is displayed
 		if (!characterOne.isAlive)
 		{
 
 			//Death animation
-			SDL_Surface * image = IMG_Load("Resources\\deathAnim.png");
-			SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image);
+			SDL_Surface* image = IMG_Load("Resources\\deathAnim.png");
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, image);
 
 			Uint32 ticks = SDL_GetTicks();
 			Uint32 sprite = (ticks / 500) % 10;
@@ -471,6 +471,7 @@ void SpaceGame::run()
 			{
 				//Remove path from the game
 				path.erase(path.begin(), path.end());
+				allHydroponicsFarms.erase(allHydroponicsFarms.begin(), allHydroponicsFarms.end());
 				traversepath.pathComplete = false;
 				traversepath.pathPointIterator = 0;
 				SpaceGame::run();
@@ -521,6 +522,7 @@ void SpaceGame::run()
 					//Restart the game if the user clicks on the button
 					if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
+						deleteVectors();
 						SpaceGame::run();
 					}
 				}
@@ -529,6 +531,12 @@ void SpaceGame::run()
 
 		SDL_RenderPresent(renderer);
 	}// End while running
+}
+
+void SpaceGame::deleteVectors()
+{
+	path.erase(path.begin(), path.end());
+	allHydroponicsFarms.erase(allHydroponicsFarms.begin(), allHydroponicsFarms.end());
 }
 
 void SpaceGame::drawPath(Point& point, Level& level)
