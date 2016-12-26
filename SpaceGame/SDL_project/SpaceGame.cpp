@@ -23,11 +23,6 @@ SpaceGame::SpaceGame()
 	gameOverText("Resources\\game_over.png"),
 	fireTexture("Resources\\SpawnItems\\fire1.png"),
 	backgroundTexture("Resources\\background.png"),
-	menuBackgroundTexture("Resources\\menuBackground1.png"),
-	exitButtonTexture("Resources\\exitButton1.png"),
-	exitButtonHighlighted("Resources\\exitButtonHighlighted1.png"),
-	restartButtonTexture("Resources\\restartButton.png"),
-	restartButtonHighlighted("Resources\\restartButtonHighlighted.png"),
 	hullBreachTexture("Resources\\roomSprites\\hullBreach2.png"),
 	deathAnim("Resources\\deathAnim.png"),
 	goalTexture("Resources\\roomSprites\\crate1.png"){
@@ -86,6 +81,7 @@ void SpaceGame::run()
 	ObjectiveManager objectivemanager;
 	ToolBar toolbar;
 	Hydroponics hydroponics;
+	EscapeMenu escapemenu;
 	
 
 	//Character needs a pointer to the room to get the state
@@ -169,8 +165,6 @@ void SpaceGame::run()
 		//opens the door when a player goes through
 		playerInteraction.Interaction(room, characterOne, oxygen);
 		playerInteraction.Interaction(room, NpcOne, oxygen);
-
-
 
 		for (int x = 0; x < room.grid.size(); x++)
 		{
@@ -284,12 +278,13 @@ void SpaceGame::run()
 								openDoorTexture.render(renderer, xPos, yPos, cellSize, cellSize);
 							}
 
+							
+
 							// Renders the fire cells
 							if (room.grid[x][y]->isOnFire)
 							{
-								int varyingSize = sin(SDL_GetTicks() / 1000);
 								fireTexture.alterTransparency(150);
-								fireTexture.render(renderer, xPos, yPos, cellSize - (varyingSize / 100), cellSize - (varyingSize / 100));
+								fireTexture.render(renderer, xPos, yPos, cellSize, cellSize);
 							}
 							// Renders the hullBreach
 							if (room.grid[x][y]->isHullBreach)
@@ -444,7 +439,7 @@ void SpaceGame::run()
 			//starts a new game
 			else
 			{
-				path.erase(path.begin(), path.end());
+				deleteVectors();
 				traversepath.pathComplete = false;
 				traversepath.pathPointIterator = 0;
 				SpaceGame::run();
@@ -471,8 +466,7 @@ void SpaceGame::run()
 			else
 			{
 				//Remove path from the game
-				path.erase(path.begin(), path.end());
-				allHydroponicsFarms.erase(allHydroponicsFarms.begin(), allHydroponicsFarms.end());
+				deleteVectors();
 				traversepath.pathComplete = false;
 				traversepath.pathPointIterator = 0;
 				SpaceGame::run();
@@ -484,49 +478,17 @@ void SpaceGame::run()
 		//////////////////////////////////////
 		if (menu)
 		{
-			menuBackgroundTexture.alterTransparency(240);
-			exitButtonTexture.alterTransparency(200);
-			menuBackgroundTexture.render(renderer, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-			//Variables to store the button locations
-			int exitButton_X = WINDOW_WIDTH / 2;
-			int exitButton_Y = WINDOW_HEIGHT / 2 + (WINDOW_HEIGHT / 4);
-			int restartButton_X = WINDOW_WIDTH / 2;
-			int restartButton_Y = WINDOW_HEIGHT / 2 + (WINDOW_HEIGHT / 3);
-
-			exitButtonTexture.render(renderer, exitButton_X, exitButton_Y, 93, 36);
-			restartButtonTexture.render(renderer, restartButton_X, restartButton_Y, 200, 25);
-
-			// check to see if the mouse is on the button
-			if (mouse_X > exitButton_X - 46 && mouse_X < exitButton_X + 46)
+			escapemenu.RunEscapeMenu(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y, running);
+			if (escapemenu.exit)
 			{
-				if (mouse_Y > exitButton_Y - 18 && mouse_Y < exitButton_Y + 18)
-				{
-					//highlight the button if the mouse is over it
-					exitButtonHighlighted.render(renderer, exitButton_X, exitButton_Y, 93, 36);
-
-					// If the user clicks close the game
-					if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT))
-					{
-						running = false;
-					}
-				}
+				running = false;
 			}
-			// If the mouse goes over the restart button
-			if (mouse_X > restartButton_X - 46 && mouse_X < restartButton_X + 46)
+			if (escapemenu.restart)
 			{
-				if (mouse_Y > restartButton_Y - 18 && mouse_Y < restartButton_Y + 18)
-				{
-					//Render the highlighted restart button
-					restartButtonHighlighted.render(renderer, restartButton_X, restartButton_Y, 200, 25);
-
-					//Restart the game if the user clicks on the button
-					if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT))
-					{
-						deleteVectors();
-						SpaceGame::run();
-					}
-				}
+				deleteVectors();
+				traversepath.pathComplete = false;
+				traversepath.pathPointIterator = 0;
+				SpaceGame::run();
 			}
 		}
 

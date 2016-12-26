@@ -21,6 +21,7 @@
 #include "ToolBar.h"
 #include "Items.h"
 #include "Hydroponics.h"
+#include "EscapeMenu.h"
 
 //! The main class
 /*!
@@ -64,7 +65,7 @@ public:
 	int mouse_X, mouse_Y;
 
 	//! Fog of War distance
-	int fogOfWar = WINDOW_WIDTH;
+	int fogOfWar = 5;
 private:
 
 	//! start point and end point for pathfinding
@@ -113,16 +114,8 @@ private:
 	Texture fireTexture;
 	//! Is the texture for the background
 	Texture backgroundTexture;
-	//! Is the texture for the menu background
-	Texture menuBackgroundTexture;
-	//! Is the texture for the exit button on the menu
-	Texture exitButtonTexture;
-	//! Is the texture for the highlited exit button
-	Texture exitButtonHighlighted;
-	//! Is the texture for the restart button
-	Texture restartButtonTexture;
-	//! Is the texuture for the highlighted restart button
-	Texture restartButtonHighlighted;
+	
+	
 	//! Is the texture for hull breaches
 	Texture hullBreachTexture;
 	//! Is the death animation texture

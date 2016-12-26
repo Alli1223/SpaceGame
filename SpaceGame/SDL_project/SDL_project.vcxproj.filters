@@ -94,6 +94,9 @@
     <ClCompile Include="Hydroponics.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
+    <ClCompile Include="EscapeMenu.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -194,6 +197,9 @@
     </ClInclude>
     <ClInclude Include="Hydroponics.h">
       <Filter>Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="EscapeMenu.h">
+      <Filter>Headers\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
