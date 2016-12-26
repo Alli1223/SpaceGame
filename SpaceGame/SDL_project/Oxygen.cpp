@@ -30,11 +30,8 @@ void Oxygen::addOxygen(int mouseX, int mouseY, int cellSize, Level grid)
 }
 
 //Decreases oxygen in a selected cell
-void Oxygen::removeOxygen(int mouseX, int mouseY, int cellSize, Level grid)
+void Oxygen::removeOxygen(Level& grid)
 {
-	//get the cell of where the mouse was clicked
-	int cellX = mouseX / cellSize;
-	int cellY = mouseY / cellSize;
 
 	
 }
@@ -52,30 +49,34 @@ void Oxygen::update(Level& grid, int cellX, int cellY)
 	if (grid.grid[cellX][cellY]->isRoom && !grid.grid[cellX][cellY]->isOpenDoor)
 	{
 		//check cells are within level
-		if (point.getX() - 1 >= 0 && point.getX() + 1 <= grid.getLevelWidth() && point.getY() - 1 >= 0 && point.getY() + 1 <= grid.getLevelHeight() && point.getY() - 1 >= 0 && point.getX() - 1 >= 0)
+		if (point.getX() - 1 >= 0 && point.getX() + 1 <= grid.getLevelWidth() && point.getY() - 1 >= 0 && point.getY() + 1 <= grid.getLevelHeight())
 		{
 			//gets neighbour cells around the point
 			for (auto neighbour : getNeighbourCells(point, grid))
 			{
 				//check cells are within level
-				if (neighbour.getX() - 1 >= 0 && neighbour.getX() + 1 <= grid.getLevelWidth() && neighbour.getY() - 1 >= 0 && neighbour.getY() + 1 <= grid.getLevelHeight() && neighbour.getY() - 1 >= 0 && neighbour.getX() - 1 >= 0)
+				if (neighbour.getX() - 1 >= 0 && neighbour.getX() + 1 <= grid.getLevelWidth() && neighbour.getY() - 1 >= 0 && neighbour.getY() + 1 <= grid.getLevelHeight())
 				{
+					// Cannot go thrugh closed doors
 					if (!grid.grid[point.getX()][point.getY()]->isOpenDoor || !grid.grid[neighbour.getX()][neighbour.getY()]->isOpenDoor || !grid.grid[point.getX()][point.getY()]->isClosedDoor || !grid.grid[neighbour.getX()][neighbour.getY()]->isClosedDoor)
 					{
-						//if the neighbour has 
+						//if the neighbour has 100 oxygen and current point has less than 100 increase current point
 						if (grid.grid[point.getX()][point.getY()]->getOxygenLevel() < 100 && grid.grid[neighbour.getX()][neighbour.getY()]->getOxygenLevel() == 100)
 						{
 							grid.grid[point.getX()][point.getY()]->setOxygenLevel(grid.grid[point.getX()][point.getY()]->getOxygenLevel() + oxygenSpreadRate);
 						}
+
+
 						if (grid.grid[point.getX()][point.getY()]->isOnFire)
 						{
 							grid.grid[point.getX()][point.getY()]->oxygenLevel = 0;
 						}
-						
+
 					}
 				}
 			}
 		}
+
 	}
 }
 	

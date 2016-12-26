@@ -20,7 +20,7 @@ public:
 	void addOxygen(int mouseX, int mouseY, int cellSize, Level grid);
 
 	//! Removes oxygen based on where the mouse was clicked
-	void removeOxygen(int mouseX, int mouseY, int cellSize, Level grid);
+	void removeOxygen(Level& grid);
 
 	//! Getter for getting the oxygen reserve level
 	int getOxygenReserves() { return oxygenReserves; }

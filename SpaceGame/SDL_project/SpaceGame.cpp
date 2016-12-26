@@ -287,8 +287,9 @@ void SpaceGame::run()
 							// Renders the fire cells
 							if (room.grid[x][y]->isOnFire)
 							{
+								int varyingSize = sin(SDL_GetTicks() / 1000);
 								fireTexture.alterTransparency(150);
-								fireTexture.render(renderer, xPos, yPos, cellSize, cellSize);
+								fireTexture.render(renderer, xPos, yPos, cellSize - (varyingSize / 100), cellSize - (varyingSize / 100));
 							}
 							// Renders the hullBreach
 							if (room.grid[x][y]->isHullBreach)
@@ -404,7 +405,7 @@ void SpaceGame::run()
 			}
 		}
 		// Render the vector of hydroponics
-		hydroponics.renderItems(renderer, allHydroponicsFarms);
+		hydroponics.renderItems(renderer,room, allHydroponicsFarms);
 
 		// If the character has died the game over screen is displayed
 		if (!characterOne.isAlive)

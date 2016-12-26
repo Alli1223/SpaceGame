@@ -51,6 +51,8 @@ public:
 	bool isOxygenTank = false;
 	//! Whether the cell is an Fire extengusher
 	bool isHealthPack = false;
+	//! Whether the cell is a vacuum
+	bool isVacuum = false;
 
 	//! cell Orientation
 	int cellOrientation = 9;

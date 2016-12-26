@@ -26,10 +26,15 @@ void Hydroponics::spawnItem(SDL_Renderer* renderer, Level& level, std::vector<Hy
 	allHydroponicsFarms.push_back(hydroponics);
 }
 
-void  Hydroponics::renderItems(SDL_Renderer* renderer, std::vector<Hydroponics>& allHydroponicsFarms)
+void  Hydroponics::renderItems(SDL_Renderer* renderer, Level& level, std::vector<Hydroponics>& allHydroponicsFarms)
 {
 	for (int iter = 0; iter < allHydroponicsFarms.size(); iter++)
 	{
 		hydroponicsTexture.render(renderer, allHydroponicsFarms[iter].getX(), allHydroponicsFarms[iter].getY(), allHydroponicsFarms[iter].getwidth(), allHydroponicsFarms[iter].getheight());
+
+		if (allHydroponicsFarms[iter].isProducingOxygen)
+			level.grid[allHydroponicsFarms[iter].getX() / level.getCellSize()][allHydroponicsFarms[iter].getY() / level.getCellSize()]->oxygenLevel = 100;
+
 	}
+
 }

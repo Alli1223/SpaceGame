@@ -7,7 +7,7 @@ public:
 	Hydroponics();
 	~Hydroponics();
 
-	void Hydroponics::renderItems(SDL_Renderer* renderer, std::vector<Hydroponics>& allHydroponicsFarms);
+	void Hydroponics::renderItems(SDL_Renderer* renderer, Level& level, std::vector<Hydroponics>& allHydroponicsFarms);
 
 	bool isProducingOxygen = true;
 	bool isProducingFood = true;
