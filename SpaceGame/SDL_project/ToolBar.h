@@ -1,5 +1,7 @@
 #pragma once
 #include "GUI.h"
+#include "Level.h"
+#include "RoomDesign.h"
 class ToolBar : public GUI
 {
 public:
@@ -8,6 +10,8 @@ public:
 	
 	//! Function that renders the toolbar
 	void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW_HEIGHT, int mouseX, int mouseY);
+
+	void ToolBar::ToolBarFunctionality(Level& room, RoomDesign& designroom, int mouseX, int mouseY);
 
 	//! The getters and setters for the toolbar selection
 	int getToolbarSelection() const { return toolbarSelection; }
@@ -24,8 +28,6 @@ public:
 	//! Is the texture for the door
 	Texture DoorTexture;
 
-
-	
 
 	int toolbarIconSize = 50;
 	int numberOfToolbarIcons = 0;

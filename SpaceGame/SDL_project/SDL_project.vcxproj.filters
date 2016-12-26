@@ -91,6 +91,9 @@
     <ClCompile Include="Items.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
+    <ClCompile Include="Hydroponics.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -187,6 +190,9 @@
       <Filter>Headers\Main Game Classes</Filter>
     </ClInclude>
     <ClInclude Include="Items.h">
+      <Filter>Headers\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Hydroponics.h">
       <Filter>Headers\Items</Filter>
     </ClInclude>
   </ItemGroup>

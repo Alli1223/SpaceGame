@@ -19,6 +19,8 @@
 #include "GameSettings.h"
 #include "GUI.h"
 #include "ToolBar.h"
+#include "Items.h"
+#include "Hydroponics.h"
 
 //! The main class
 /*!

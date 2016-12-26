@@ -390,48 +390,12 @@ void SpaceGame::run()
 
 		//Renders the toolbar
 		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
-		int toolbarSelection = toolbar.getToolbarSelection();
+		toolbar.ToolBarFunctionality(room, designroom, mouse_X, mouse_Y);
+		Hydroponics hydroponicsOne;
+		if(toolbar.getToolbarSelection() == 3)
+			hydroponicsOne.spawnItem(renderer, mouse_X, mouse_Y);
 
-		//Toolbar functionality
-		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 1)
-		{
-			//TODO: Fix boundy error
-			for (int mX = (mouse_X / cellSize) - 1; mX < (mouse_X / cellSize) + 2; mX++)
-			{
-				for (int mY = (mouse_Y / cellSize) - 2; mY < (mouse_Y / cellSize) + 1; mY++)
-				{
-					room.grid[mX][mY]->isRoom = true;
-				}
-			}
-			for (int mX = (mouse_X / cellSize) - 3; mX < (mouse_X / cellSize) + 3; mX++)
-			{
-				for (int mY = (mouse_Y / cellSize) - 3; mY < (mouse_Y / cellSize) + 3; mY++)
-				{
-					designroom.designRoom(room, mX, mY);
-
-				}
-			}
-		}
-		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 2)
-		{
-			room.grid[mouse_X / cellSize][mouse_Y / cellSize]->isRoom = false;
-			for (int mX = (mouse_X / cellSize) - 3; mX < (mouse_X / cellSize) + 3; mX++)
-			{
-				for (int mY = (mouse_Y / cellSize) - 3; mY < (mouse_Y / cellSize) + 3; mY++)
-				{
-					designroom.designRoom(room, mX, mY);
-				}
-			}
-		}
-		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 3)
-		{
-			room.grid[mouse_X / cellSize][mouse_Y / cellSize]->isOpenDoor = true;
-		}
-
-		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
-		{
-			room.grid[mouse_X / cellSize][mouse_Y / cellSize]->oxygenLevel = 100;
-		}
+		
 
 		// If the character has died the game over screen is displayed
 		if (!characterOne.isAlive)

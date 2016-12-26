@@ -1,4 +1,7 @@
 #pragma once
+#include "Texture.h"
+#include "Level.h"
+
 class Items
 {
 public:
@@ -13,7 +16,23 @@ public:
 	int getY() { return y; }
 	int setY(int newY) { return y = newY; }
 
+	int getwidth() { return width; }
+	int setwidth(int newwidth) { return width = newwidth; }
+
+	int getheight() { return height; }
+	int setheight(int newheight) { return height = newheight; }
+
+	float getHealth() { return health; }
+	float setHealth(int newhealth) { return health = newhealth; }
+
+	Level level;
+	
+
 private:
-	int x; int y;
+	int x = 10; int y = 10;
+
+	int width = level.getCellSize(); int height = level.getCellSize();
+
+	float health;
 };
 

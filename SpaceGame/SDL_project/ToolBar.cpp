@@ -33,6 +33,9 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 	int iconThreeXpos = toolbarXpos;
 	int iconThreeYpos = toolbarYpos;
 
+	int iconFourXpos = toolbarXpos + (toolbarSizeX * 2);
+	int iconFourYpos = toolbarYpos;
+
 	//toolBarBackground.alterTransparency(20);
 	toolBarBackground.render(renderer, toolbarXpos, toolbarYpos, toolbarSizeX, toolbarSizeY);
 	roomCell.render(renderer, iconOneXpos, iconOneYpos, toolbarIconSize, toolbarIconSize);
@@ -68,6 +71,54 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 			setToolbarSelection(3);
 		}
 	}
+
+	// ICON FOUR
 		
 	
+}
+
+void ToolBar::ToolBarFunctionality(Level& room, RoomDesign& designroom, int mouse_X, int mouse_Y)
+{
+	int toolbarSelection = getToolbarSelection();
+	//Toolbar functionality
+	if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 1)
+	{
+		//TODO: Fix boundy error
+		for (int mX = (mouse_X / room.getCellSize()) - 1; mX < (mouse_X / room.getCellSize()) + 2; mX++)
+		{
+			for (int mY = (mouse_Y / room.getCellSize()) - 2; mY < (mouse_Y / room.getCellSize()) + 1; mY++)
+			{
+				room.grid[mX][mY]->isRoom = true;
+			}
+		}
+		for (int mX = (mouse_X / room.getCellSize()) - 3; mX < (mouse_X / room.getCellSize()) + 3; mX++)
+		{
+			for (int mY = (mouse_Y / room.getCellSize()) - 3; mY < (mouse_Y / room.getCellSize()) + 3; mY++)
+			{
+				designroom.designRoom(room, mX, mY);
+
+			}
+		}
+	}
+
+	if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 2)
+	{
+		room.grid[mouse_X / room.getCellSize()][mouse_Y / room.getCellSize()]->isRoom = false;
+		for (int mX = (mouse_X / room.getCellSize()) - 3; mX < (mouse_X / room.getCellSize()) + 3; mX++)
+		{
+			for (int mY = (mouse_Y / room.getCellSize()) - 3; mY < (mouse_Y / room.getCellSize()) + 3; mY++)
+			{
+				designroom.designRoom(room, mX, mY);
+			}
+		}
+	}
+	if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 3)
+	{
+		room.grid[mouse_X / room.getCellSize()][mouse_Y / room.getCellSize()]->isOpenDoor = true;
+	}
+
+	if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
+	{
+		room.grid[mouse_X / room.getCellSize()][mouse_Y / room.getCellSize()]->oxygenLevel = 100;
+	}
 }
