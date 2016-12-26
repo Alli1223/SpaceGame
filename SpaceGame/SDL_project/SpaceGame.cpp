@@ -85,6 +85,7 @@ void SpaceGame::run()
 	TraversePath traversepath;
 	ObjectiveManager objectivemanager;
 	ToolBar toolbar;
+	Hydroponics hydroponics;
 	
 
 	//Character needs a pointer to the room to get the state
@@ -394,14 +395,13 @@ void SpaceGame::run()
 		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
 		toolbar.ToolBarFunctionality(room, designroom, renderer, mouse_X, mouse_Y);
 		
-		
-		Items items;
-		Hydroponics hydroponics;
-		
 		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbar.getToolbarSelection() == 4)
 		{
-			if(room.grid[mouse_X / cellSize][mouse_Y/cellSize]->isRoom)
+			if (room.grid[mouse_X / cellSize][mouse_Y / cellSize]->isRoom && toolbar.numberOfItem4 > 0)
+			{
 				hydroponics.spawnItem(renderer, room, allHydroponicsFarms, mouse_X, mouse_Y);
+				toolbar.numberOfItem4--;
+			}
 		}
 		// Render the vector of hydroponics
 		hydroponics.renderItems(renderer, allHydroponicsFarms);

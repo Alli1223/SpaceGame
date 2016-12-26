@@ -10,6 +10,7 @@ public:
 
 	// Difficulty setting that will change the cell size??
 
+	//! initial window settings
 	int WINDOW_WIDTH = 800;
 	int WINDOW_HEIGHT = 600;
 

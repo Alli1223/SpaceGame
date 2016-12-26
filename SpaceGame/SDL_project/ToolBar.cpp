@@ -25,8 +25,8 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 	int toolbarXpos = WINDOW_WIDTH / 2;
 	int toolbarYpos = (WINDOW_HEIGHT - toolbarSizeY);
 	
-	int toobarIconXPos = toolbarXpos - (toolbarSizeX / 2);
-	int iconOneXpos = toolbarXpos - (toolbarXpos / 2);
+	int toobarIconXPos = toolbarXpos + (toolbarIconSize * 2);
+	int iconOneXpos = toolbarXpos;
 	int iconOneYpos = toolbarYpos;
 	toobarIconXPos = toolbarXpos + toolbarIconSize * 2;
 
@@ -43,7 +43,6 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 
 	//toolBarBackground.alterTransparency(20);
 	toolBarBackground.render(renderer, toolbarXpos, toolbarYpos, toolbarSizeX, toolbarSizeY);
-
 
 	roomCell.render(renderer, iconOneXpos, iconOneYpos, toolbarIconSize, toolbarIconSize);
 	// ICON ONE
@@ -82,12 +81,12 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 	}
 
 	// ICON FOUR
-
-	HydroponicsIconTexture.render(renderer, iconFourXpos, iconFourYpos, toolbarIconSize, toolbarIconSize);
-	if (mouseX > iconFourXpos - (toolbarIconSize / 2) && mouseX < iconFourXpos + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+	if (numberOfItem4 > 0)
 	{
-		if (numberOfItem4 > 0)
+		HydroponicsIconTexture.render(renderer, iconFourXpos, iconFourYpos, toolbarIconSize, toolbarIconSize);
+		if (mouseX > iconFourXpos - (toolbarIconSize / 2) && mouseX < iconFourXpos + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 		{
+
 			HydroponicsIconTexture.render(renderer, iconFourXpos, iconFourYpos, toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
 			if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 			{

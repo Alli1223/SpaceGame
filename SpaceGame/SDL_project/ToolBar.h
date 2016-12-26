@@ -4,6 +4,7 @@
 #include "RoomDesign.h"
 #include "Hydroponics.h"
 
+
 class ToolBar : public GUI
 {
 public:
@@ -19,6 +20,9 @@ public:
 	int getToolbarSelection() const { return toolbarSelection; }
 	int setToolbarSelection(int newToolbarSelection) { return toolbarSelection = newToolbarSelection; }
 
+	bool ToolBar::isMouseInToolBar();
+	
+
 	//! Is the texture for the toolbar background
 	Texture toolBarBackground;
 	//! Is the texture for the room cell
@@ -32,17 +36,16 @@ public:
 	//! Is the texture for the door
 	Texture HydroponicsIconTexture;
 
-
+	// IconSize
 	int toolbarIconSize = 50;
+
+	// How much they increase in size when mouseover
 	int mouseOverSizeIncrease = 10;
-	int numberOfToolbarIcons = 0;
 
 	int numberOfItem1 = 5;
 	int numberOfItem2 = 5;
 	int numberOfItem3 = 5;
-	int numberOfItem4 = 50;
-
-
+	int numberOfItem4 = 5;
 
 
 private:
