@@ -73,7 +73,6 @@
     <ClCompile Include="NPC.cpp">
       <Filter>Source Files\Character Classes\NPC Classes</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectiveManager.cpp" />
     <ClCompile Include="GameSettings.cpp">
       <Filter>Source Files\Main Game Classes</Filter>
     </ClCompile>
@@ -85,6 +84,12 @@
     </ClCompile>
     <ClCompile Include="PlayerInteraction.cpp">
       <Filter>Source Files\Level Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectiveManager.cpp">
+      <Filter>Source Files\Main Game Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Items.cpp">
+      <Filter>Source Files\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,7 +171,6 @@
     <ClInclude Include="NPC.h">
       <Filter>Headers\Character Classes\NPC Classes</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectiveManager.h" />
     <ClInclude Include="GameSettings.h">
       <Filter>Headers\Main Game Classes</Filter>
     </ClInclude>
@@ -178,6 +182,12 @@
     </ClInclude>
     <ClInclude Include="PlayerInteraction.h">
       <Filter>Headers\Level Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectiveManager.h">
+      <Filter>Headers\Main Game Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
+      <Filter>Headers\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +254,12 @@
     </Filter>
     <Filter Include="Headers\GUI">
       <UniqueIdentifier>{338eb718-5c1e-43ae-837d-1b797090963e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Items">
+      <UniqueIdentifier>{655ecf84-39d8-4683-bd95-e94648c87583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{79959b5a-2da3-4857-b606-f7000ed433ea}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

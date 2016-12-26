@@ -60,7 +60,7 @@ public:
 	std::shared_ptr<Level> currentRoom;
 	
 	//! A double for the character's health
-	double health = 100;
+	double health = 1000;
 	//! Boolean for whether character is alive
 	bool isAlive = true; 
 	bool hasWon = false;
@@ -81,7 +81,7 @@ public:
 
 private:
 	//! Integers for the character's X and Y position
-	int x = windowWidth / 2, y = windowHeight / 2;
+	int x = 5, y = 5;
 	//! Integer for the character's size when rendered
 	int size = 25;
 	//! Integer for the characters current speed

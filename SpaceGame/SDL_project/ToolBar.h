@@ -25,8 +25,7 @@ public:
 	Texture DoorTexture;
 
 
-	//! Pointer to the renderer
-	SDL_Renderer* renderer;
+	
 
 	int toolbarIconSize = 50;
 	int numberOfToolbarIcons = 0;

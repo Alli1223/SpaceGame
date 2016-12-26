@@ -59,7 +59,7 @@ void Fire::fireSpread(Level& grid, int cellX, int cellY)
 					if (grid.grid[cellX + (randomDirectionX)][cellY + (randomDirectionY)]->getOxygenLevel() >= 25)
 					{
 						// Random fire spread rate
-						int randomSpawnChance = rand() % (0 - spawnRate);
+						int randomSpawnChance = rand() % (0 - spreadRate);
 						if (randomSpawnChance == 0)
 						{
 							grid.grid[cellX + (randomDirectionX)][cellY + (randomDirectionY)]->isOnFire = true;

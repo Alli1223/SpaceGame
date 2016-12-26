@@ -22,6 +22,6 @@ public:
 
 private:
 	//! Controls how fast the oxygen will spread
-	int spawnRate = 5;
+	int spreadRate = 7;
 };
 
