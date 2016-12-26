@@ -72,11 +72,11 @@ void SpaceGame::run()
 
 	// Choose whether to generate or load a map
 	//mapLoader.LoadMap("Resources\\Map\\Default_map.txt", room);
-	//mapLoader.generateMap(room, designroom);
+	mapLoader.generateMap(room, designroom);
 
 	Oxygen oxygen;
 	Fire fire;
-	ItemController itemcontroller;
+	PlayerInteraction itemcontroller;
 	MainCharacter characterOne;
 	NPC NpcOne;
 	Cell cell;

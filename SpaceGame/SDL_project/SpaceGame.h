@@ -12,7 +12,7 @@
 #include "Oxygen.h"
 #include "Fire.h"
 #include "RoomDesign.h"
-#include "ItemController.h"
+#include "PlayerInteraction.h"
 #include "PathFinder.h"
 #include "TraversePath.h"
 #include "ObjectiveManager.h"

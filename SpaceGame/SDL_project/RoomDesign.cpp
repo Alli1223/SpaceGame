@@ -16,7 +16,7 @@ void RoomDesign::designRoom(Level& room, int cellX, int cellY)
 {
 
 	//check cells are within level
-	if (cellX - 1 >= 0 && cellX + 1 <= room.getLevelWidth() && cellY - 1 >= 0 && cellY + 1 <= room.getLevelHeight() && cellY - 1 >= 0 && cellX - 1 >= 0)
+	if (cellX - 1 >= 0 && cellX + 1 <= room.getLevelWidth() && cellY - 1 >= 0 && cellY + 2 <= room.getLevelHeight())
 	{
 		//RoomDesign::checkCenterCell(room, cellX, cellY);
 
