@@ -279,6 +279,11 @@ void SpaceGame::run()
 								openDoorTexture.render(renderer, xPos, yPos, cellSize, cellSize);
 							}
 
+							// Checks if the cell is a door
+							if (room.grid[x][y]->isDockingPath)
+							{
+								hullBreachTexture.render(renderer, xPos, yPos, cellSize, cellSize);
+							}
 
 							
 

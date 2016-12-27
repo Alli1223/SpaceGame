@@ -20,11 +20,30 @@ ToolBar::~ToolBar()
 
 void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW_HEIGHT, int mouseX, int mouseY)
 {
-	int toolbarSizeX = WINDOW_WIDTH - (WINDOW_WIDTH / 4);
-	int toolbarSizeY = WINDOW_HEIGHT / 15;
-	int toolbarXpos = WINDOW_WIDTH / 2;
-	int toolbarYpos = (WINDOW_HEIGHT - toolbarSizeY);
 	
+	toolbarSizeX = WINDOW_WIDTH - (WINDOW_WIDTH / 4);
+	toolbarSizeY = WINDOW_HEIGHT / 15;
+	toolbarXpos = WINDOW_WIDTH / 2;
+	toolbarYpos = (WINDOW_HEIGHT - toolbarSizeY);
+	int toobarIconXPos = toolbarXpos + (toolbarIconSize * 2);
+	bool doOnce = true;
+	if (doOnce)
+	{
+		for (int i = 0; i <= numberOfIcons; i++)
+		{
+			Icon icon;
+			icon.setX(toobarIconXPos);
+			icon.setY(toolbarYpos);
+			toobarIconXPos = toobarIconXPos + toolbarIconSize * 2;
+
+			icon.setIconID(i);
+
+			allIcons.push_back(icon);
+		}
+		doOnce = false;
+	}
+	
+	/*
 	int toobarIconXPos = toolbarXpos + (toolbarIconSize * 2);
 	int iconOneXpos = toolbarXpos;
 	int iconOneYpos = toolbarYpos;
@@ -40,57 +59,90 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 
 	int iconFourXpos = toobarIconXPos;
 	int iconFourYpos = toolbarYpos;
-
+	*/
 	//toolBarBackground.alterTransparency(20);
 	toolBarBackground.render(renderer, toolbarXpos, toolbarYpos, toolbarSizeX, toolbarSizeY);
 
-	roomCell.render(renderer, iconOneXpos, iconOneYpos, toolbarIconSize, toolbarIconSize);
-	// ICON ONE
-	if (mouseX > iconOneXpos - (toolbarIconSize / 2) && mouseX < iconOneXpos + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+	for each (auto icon in allIcons)
 	{
-		roomCell.render(renderer, iconOneXpos, iconOneYpos, toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
-		if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
-		{
-			setToolbarSelection(1);
-		}
-	}
 
-	// ICON TWO
-	emptyCellIcon.render(renderer, iconTwoXpos, iconTwoYpos, toolbarIconSize, toolbarIconSize);
-	if (mouseX > iconTwoXpos - (toolbarIconSize / 2) && mouseX < iconTwoXpos + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
-	{
-		emptyCellIcon.render(renderer, iconTwoXpos, iconTwoYpos, toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
-		if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
+		//ICON ONE
+		if (icon.getIconID() == 1)
 		{
-			setToolbarSelection(2);
-		}
-	}
+			roomCell.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
 
-	// ICON THREE
-	if (numberOfItem3 > 0)
-	{
-		DoorTexture.render(renderer, iconThreeXpos, iconThreeYpos, toolbarIconSize, toolbarIconSize);
-		if (mouseX > iconThreeXpos - (toolbarIconSize / 2) && mouseX < iconThreeXpos + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
-		{
-			DoorTexture.render(renderer, iconThreeXpos, iconThreeYpos, toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
-			if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
+
+			if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 			{
-				setToolbarSelection(3);
+				roomCell.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+				if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
+				{
+					setToolbarSelection(1);
+				}
 			}
 		}
-	}
-
-	// ICON FOUR
-	if (numberOfItem4 > 0)
-	{
-		HydroponicsIconTexture.render(renderer, iconFourXpos, iconFourYpos, toolbarIconSize, toolbarIconSize);
-		if (mouseX > iconFourXpos - (toolbarIconSize / 2) && mouseX < iconFourXpos + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+		if (icon.getIconID() == 2)
 		{
-
-			HydroponicsIconTexture.render(renderer, iconFourXpos, iconFourYpos, toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
-			if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
+			// ICON TWO
+			emptyCellIcon.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
+			if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 			{
-				setToolbarSelection(4);
+				emptyCellIcon.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+				if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
+				{
+					setToolbarSelection(2);
+				}
+			}
+		}
+		// ICON THREE
+		if (icon.getIconID() == 3)
+		{
+			if (numberOfItem3 > 0)
+			{
+				DoorTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
+				if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getY() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+				{
+					DoorTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+					if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
+					{
+						setToolbarSelection(3);
+					}
+				}
+			}
+		}
+		//ICON FOUR
+		if (icon.getIconID() == 4)
+		{
+			if (numberOfItem4 > 0)
+			{
+				HydroponicsIconTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
+				if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+				{
+
+					HydroponicsIconTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+					if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
+					{
+						setToolbarSelection(4);
+					}
+				}
+			}
+		}
+
+		// ICON FIVE
+		if (icon.getIconID() == 5)
+		{
+			if (numberOfItem5 > 0)
+			{
+				HydroponicsIconTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
+				if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+				{
+
+					HydroponicsIconTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+					if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
+					{
+						setToolbarSelection(5);
+					}
+				}
 			}
 		}
 	}
@@ -154,19 +206,13 @@ void ToolBar::ToolBarFunctionality(Level& room, RoomDesign& designroom, SDL_Rend
 		}
 	}
 	
-	if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 4)
+	//Place Item 5
+	if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 5)
 	{
-		
-		if (numberOfItem4 > 0)
+		DockingDoors dockingdoors;
+		if (numberOfItem5 > 0)
 		{
-			/*
-			Hydroponics hydroponics;
-			hydroponics.setX(mouse_X);
-			hydroponics.setY(mouse_Y);
-			
-			hydroponics.spawnItem(renderer, room, hydroponics, mouse_X, mouse_Y);
-			numberOfItem4--;
-			*/
+			dockingdoors.placeDockingDoors(renderer, room);
 		}
 	}
 	

@@ -66,7 +66,7 @@ public:
 	int mouse_X, mouse_Y;
 
 	//! Fog of War distance
-	int fogOfWar = 5;
+	int fogOfWar = WINDOW_WIDTH;
 private:
 
 	//! start point and end point for pathfinding

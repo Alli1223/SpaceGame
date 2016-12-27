@@ -167,6 +167,7 @@
     <ClInclude Include="GameSettings.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Hydroponics.h" />
+    <ClInclude Include="Icon.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="PlayerInteraction.h" />
     <ClInclude Include="Fire.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="GameSettings.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Hydroponics.cpp" />
+    <ClCompile Include="Icon.cpp" />
     <ClCompile Include="Items.cpp" />
     <ClCompile Include="PlayerInteraction.cpp" />
     <ClCompile Include="Fire.cpp" />

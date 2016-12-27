@@ -31,6 +31,7 @@ void DockingDoors::renderOverlay(SDL_Renderer* renderer, Level& level)
 	// left
 	int cellSize = level.getCellSize();
 	int mouseX, mouseY;
+	bool placeOnlyOnce = true;
 	if (dockOrientation == 0)
 	{
 		SDL_GetMouseState(&mouseX, &mouseY);
@@ -41,10 +42,15 @@ void DockingDoors::renderOverlay(SDL_Renderer* renderer, Level& level)
 			{
 				int xPos = mouseX + x * level.getCellSize();
 				int yPos = mouseY + y * level.getCellSize();
-				overlayTexture.render(renderer,  xPos,  yPos, level.getCellSize(), level.getCellSize());
+				overlayTexture.render(renderer, xPos, yPos, level.getCellSize(), level.getCellSize());
 				if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 				{
-					placeEntryPath(level, xPos, yPos);
+					if (placeOnlyOnce)
+					{
+						placeEntryPath(level, xPos, yPos);
+						placeOnlyOnce = false;
+					}
+					
 				}
 			}
 
@@ -54,13 +60,22 @@ void DockingDoors::renderOverlay(SDL_Renderer* renderer, Level& level)
 	// Right
 	if (dockOrientation == 1)
 	{
-		if (SDL_GetMouseState(&mouseX, &mouseY))
+		SDL_GetMouseState(&mouseX, &mouseY);
+
+		for (int x = 0; x < level.getLevelWidth(); x++)
 		{
-			for (int x = 0; x < level.getLevelWidth(); x++)
+			for (int y = -1; y < 2; y++)
 			{
-				for (int y = -1; y < 2; y++)
+				int xPos = mouseX + x * level.getCellSize();
+				int yPos = mouseY + y * level.getCellSize();
+				overlayTexture.render(renderer, xPos, yPos, level.getCellSize(), level.getCellSize());
+				if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 				{
-					overlayTexture.render(renderer, mouseX + (x * level.getCellSize()), mouseY + (y * level.getCellSize()), level.getCellSize(), level.getCellSize());
+					if (placeOnlyOnce)
+					{
+						placeEntryPath(level, xPos, yPos);
+						placeOnlyOnce = false;
+					}
 				}
 			}
 		}

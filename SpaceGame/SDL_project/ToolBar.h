@@ -3,6 +3,8 @@
 #include "Level.h"
 #include "RoomDesign.h"
 #include "Hydroponics.h"
+#include "Icon.h"
+#include "DockingDoors.h"
 
 
 class ToolBar : public GUI
@@ -19,7 +21,19 @@ public:
 	//! The getters and setters for the toolbar selection
 	int getToolbarSelection() const { return toolbarSelection; }
 	int setToolbarSelection(int newToolbarSelection) { return toolbarSelection = newToolbarSelection; }
-	
+
+	//! Getters
+	int getToolbarSizeX() { return toolbarSizeX; }
+	int getToolbarSizeY() { return toolbarSizeY; }
+	int getToolbarXpos() { return toolbarXpos; }
+	int getToolbarYpos() { return toolbarYpos; }
+
+	// Setters
+	int setToolbarSizeX(int newsizeX) { return toolbarSizeX = newsizeX; }
+	int setToolbarSizeY(int newsizeY) { return toolbarSizeY = newsizeY; }
+	int setToolbarXpos(int newXpos) { return toolbarXpos; }
+	int setToolbarYpos(int newYpos) { return toolbarXpos; }
+		
 
 	//! Is the texture for the toolbar background
 	Texture toolBarBackground;
@@ -34,8 +48,12 @@ public:
 	//! Is the texture for the door
 	Texture HydroponicsIconTexture;
 
+	std::vector<Icon> allIcons;
+
 	// IconSize
 	int toolbarIconSize = 50;
+
+	int numberOfIcons = 5;
 
 	// How much they increase in size when mouseover
 	int mouseOverSizeIncrease = 10;
@@ -44,10 +62,13 @@ public:
 	int numberOfItem2 = 15;
 	int numberOfItem3 = 15;
 	int numberOfItem4 = 15;
+	int numberOfItem5 = 15;
 
 
 private:
 	int toolbarSelection = 1;
+
+	int toolbarSizeX, toolbarSizeY, toolbarXpos, toolbarYpos;
 
 };
 
