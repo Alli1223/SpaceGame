@@ -18,10 +18,10 @@ public:
 	unsigned int lastTime = 0, currentTime;
 
 	//! time in seconds that fire will spawn
-	float firespawntimer = 10;
+	float firespawntimer = 1000;
 
 private:
 	//! Controls how fast the oxygen will spread
-	int spreadRate = 7;
+	int spreadRate = 3;
 };
 

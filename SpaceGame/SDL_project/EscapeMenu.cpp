@@ -58,7 +58,6 @@ void EscapeMenu::RunEscapeMenu(SDL_Renderer* renderer, int WINDOW_WIDTH, int WIN
 			if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT))
 			{
 				restart = true;
-
 			}
 		}
 	}

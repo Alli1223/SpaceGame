@@ -34,7 +34,6 @@ void  Hydroponics::renderItems(SDL_Renderer* renderer, Level& level, std::vector
 
 		if (allHydroponicsFarms[iter].isProducingOxygen)
 			level.grid[allHydroponicsFarms[iter].getX() / level.getCellSize()][allHydroponicsFarms[iter].getY() / level.getCellSize()]->oxygenLevel = 100;
-
 	}
 
 }

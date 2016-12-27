@@ -19,8 +19,6 @@ public:
 	//! The getters and setters for the toolbar selection
 	int getToolbarSelection() const { return toolbarSelection; }
 	int setToolbarSelection(int newToolbarSelection) { return toolbarSelection = newToolbarSelection; }
-
-	bool ToolBar::isMouseInToolBar();
 	
 
 	//! Is the texture for the toolbar background
@@ -42,10 +40,10 @@ public:
 	// How much they increase in size when mouseover
 	int mouseOverSizeIncrease = 10;
 
-	int numberOfItem1 = 5;
-	int numberOfItem2 = 5;
-	int numberOfItem3 = 5;
-	int numberOfItem4 = 5;
+	int numberOfItem1 = 15;
+	int numberOfItem2 = 15;
+	int numberOfItem3 = 15;
+	int numberOfItem4 = 15;
 
 
 private:
