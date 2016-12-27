@@ -53,6 +53,8 @@ public:
 	bool isHealthPack = false;
 	//! Whether the cell is a vacuum
 	bool isVacuum = false;
+	//!Whether the cell is the dockingpath
+	bool isDockingPath = false;
 
 	//! cell Orientation
 	int cellOrientation = 9;

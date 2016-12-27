@@ -97,6 +97,9 @@
     <ClCompile Include="EscapeMenu.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="DockingDoors.cpp">
+      <Filter>Source Files\Dock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -201,6 +204,9 @@
     <ClInclude Include="EscapeMenu.h">
       <Filter>Headers\GUI</Filter>
     </ClInclude>
+    <ClInclude Include="DockingDoors.h">
+      <Filter>Headers\Dock</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SDL_project.rc" />
@@ -272,6 +278,18 @@
     </Filter>
     <Filter Include="Source Files\Items">
       <UniqueIdentifier>{79959b5a-2da3-4857-b606-f7000ed433ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Dock">
+      <UniqueIdentifier>{f3cd8b75-d734-4b25-ad70-108ec61f0603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dock">
+      <UniqueIdentifier>{9248f0cd-5552-460f-a777-b534b07272dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Dock\CargoShip">
+      <UniqueIdentifier>{37dc8c72-527e-46c4-beef-15aea3bb8749}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Dock\cargoShip">
+      <UniqueIdentifier>{906c2536-2766-4050-a74b-8bb50e56d321}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

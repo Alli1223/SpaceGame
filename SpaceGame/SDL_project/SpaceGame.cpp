@@ -82,6 +82,7 @@ void SpaceGame::run()
 	ToolBar toolbar;
 	Hydroponics hydroponics;
 	EscapeMenu escapemenu;
+	DockingDoors dockingdoors;
 	
 
 	//Character needs a pointer to the room to get the state
@@ -278,6 +279,7 @@ void SpaceGame::run()
 								openDoorTexture.render(renderer, xPos, yPos, cellSize, cellSize);
 							}
 
+
 							
 
 							// Renders the fire cells
@@ -386,8 +388,9 @@ void SpaceGame::run()
 			characterLeft.render(renderer, characterOne.getX(), characterOne.getY(), characterOne.getSize(), characterOne.getSize());
 		}
 
+		dockingdoors.placeDockingDoors(renderer, room);
+
 		//Renders the toolbar
-		
 		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
 		toolbar.ToolBarFunctionality(room, designroom, renderer, mouse_X, mouse_Y);
 		

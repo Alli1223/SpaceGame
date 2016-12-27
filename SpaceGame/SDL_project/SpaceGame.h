@@ -22,6 +22,7 @@
 #include "Items.h"
 #include "Hydroponics.h"
 #include "EscapeMenu.h"
+#include "DockingDoors.h"
 
 //! The main class
 /*!
