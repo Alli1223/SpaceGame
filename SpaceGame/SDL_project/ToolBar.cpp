@@ -26,7 +26,6 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 	toolbarXpos = WINDOW_WIDTH / 2;
 	toolbarYpos = (WINDOW_HEIGHT - toolbarSizeY);
 	int toobarIconXPos = toolbarXpos + (toolbarIconSize * 2);
-	bool doOnce = true;
 	if (doOnce)
 	{
 		for (int i = 0; i <= numberOfIcons; i++)
@@ -207,13 +206,9 @@ void ToolBar::ToolBarFunctionality(Level& room, RoomDesign& designroom, SDL_Rend
 	}
 	
 	//Place Item 5
-	if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbarSelection == 5)
+	if (SDL_GetMouseState(&mouse_X, &mouse_Y) && toolbarSelection == 5)
 	{
-		DockingDoors dockingdoors;
-		if (numberOfItem5 > 0)
-		{
-			dockingdoors.placeDockingDoors(renderer, room);
-		}
+		
 	}
 	
 	

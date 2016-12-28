@@ -4,13 +4,13 @@
 
 SpaceGame::SpaceGame()
 	// Texture file locations
-	: roomCell("Resources\\roomSprites\\center.png"), emptyCell("Resources\\roomSprites\\emptyCell.png"),
-	topRoomCell("Resources\\roomSprites\\top.png"), topRightRoomCell("Resources\\roomSprites\\topRight.png"), rightRoomCell("Resources\\roomSprites\\right.png"), bottomRightRoomCell("Resources\\roomSprites\\bottomRight.png"), bottomRoomCell("Resources\\roomSprites\\bottom.png"), bottomLeftRoomCell("Resources\\roomSprites\\bottomLeft.png"), leftRoomCell("Resources\\roomSprites\\left.png"), topLeftRoomCell("Resources\\roomSprites\\topLeft.png"),
+	: roomCell("Resources\\roomSprites\\texturePack\\center.png"), emptyCell("Resources\\roomSprites\\emptyCell.png"),
+	topRoomCell("Resources\\roomSprites\\texturePack\\top.png"), topRightRoomCell("Resources\\roomSprites\\texturePack\\topRight.png"), rightRoomCell("Resources\\roomSprites\\texturePack\\right.png"), bottomRightRoomCell("Resources\\roomSprites\\texturePack\\bottomRight.png"), bottomRoomCell("Resources\\roomSprites\\texturePack\\bottom.png"), bottomLeftRoomCell("Resources\\roomSprites\\texturePack\\bottomLeft.png"), leftRoomCell("Resources\\roomSprites\\texturePack\\left.png"), topLeftRoomCell("Resources\\roomSprites\\texturePack\\topLeft.png"),
 	characterTex("Resources\\crew2.png"), characterLeft("Resources\\Character\\crewLeft.png"), characterRight("Resources\\Character\\crewRight.png"), characterUp("Resources\\Character\\crewUp.png"), characterDown("Resources\\Character\\crewDown.png"),
 	npcLeft("Resources\\Character\\npcLeft.png"), npcRight("Resources\\Character\\npcRight.png"), npcUp("Resources\\Character\\npcUp.png"), npcDown("Resources\\Character\\npcDown.png"),
 	NpcTex("Resources\\Character\\NPC.png"),
-	openDoorTexture("Resources\\roomSprites\\center.png"),
-	closedDoorTexture("Resources\\door_sprite.png"),
+	openDoorTexture("Resources\\roomSprites\\texturePack\\center.png"),
+	closedDoorTexture("Resources\\roomSprites\\texturePack\\door.png"),
 	oxygenTex("Resources\\oxygen.png"),
 	oxygenTank("Resources\\SpawnItems\\oxygenTank.png"), healthPack("Resources\\SpawnItems\\healthPack.png"),
 	healthBar("Resources\\health.png"),
@@ -67,11 +67,11 @@ void SpaceGame::run()
 
 	// Choose whether to generate or load a map
 	//mapLoader.LoadMap("Resources\\Map\\Default_map.txt", room);
-	//mapLoader.generateMap(room, designroom);
+	mapLoader.generateMap(room, designroom);
 
 	Oxygen oxygen;
 	Fire fire;
-	PlayerInteraction playerInteraction;
+	PlayerInteraction characterInteraction;
 	MainCharacter characterOne;
 	NPC NpcOne;
 	Cell cell;
@@ -164,8 +164,8 @@ void SpaceGame::run()
 
 
 		//opens the door when a player goes through
-		playerInteraction.Interaction(room, characterOne, oxygen);
-		playerInteraction.Interaction(room, NpcOne, oxygen);
+		characterInteraction.Interaction(room, characterOne, oxygen);
+		characterInteraction.Interaction(room, NpcOne, oxygen);
 
 		for (int x = 0; x < room.grid.size(); x++)
 		{
@@ -393,11 +393,11 @@ void SpaceGame::run()
 			characterLeft.render(renderer, characterOne.getX(), characterOne.getY(), characterOne.getSize(), characterOne.getSize());
 		}
 
-		dockingdoors.placeDockingDoors(renderer, room);
+		
 
-		//Renders the toolbar
-		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
+		// TOOLBAR
 		toolbar.ToolBarFunctionality(room, designroom, renderer, mouse_X, mouse_Y);
+		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
 		
 		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbar.getToolbarSelection() == 4)
 		{
@@ -406,6 +406,15 @@ void SpaceGame::run()
 				hydroponics.spawnItem(renderer, room, allHydroponicsFarms, mouse_X, mouse_Y);
 				toolbar.numberOfItem4--;
 			}
+		}
+
+		if (toolbar.getToolbarSelection() == 5)
+		{
+			if (toolbar.numberOfItem4 > 0)
+			{
+				dockingdoors.placeDockingDoors(renderer, room);
+			}
+
 		}
 		// Render the vector of hydroponics
 		hydroponics.renderItems(renderer,room, allHydroponicsFarms);

@@ -13,6 +13,8 @@ public:
 	void DockingDoors::placeDockingDoors(SDL_Renderer* renderer, Level& level);
 	void DockingDoors::changeOrientation();
 	void DockingDoors::renderOverlay(SDL_Renderer* renderer, Level& level);
-	void DockingDoors::placeEntryPath(Level& level, int xPos, int yPos);
+	void DockingDoors::placeEntryPath(Level& level, int orientation);
+
+	bool placeOnlyOnce = true;
 };
 

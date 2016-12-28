@@ -52,6 +52,8 @@ public:
 	void chooseDirection(const Uint8* keyboardState);
 	//! Changes the character's X and Y value depending on the player's input
 	void moveCharacter(const Uint8* keyboardState);
+
+
 	
 	
 	//! An shared pointer to the character's state.
@@ -86,5 +88,8 @@ private:
 	int size = 25;
 	//! Integer for the characters current speed
 	int speed = 3; 
+
+	int Hunger = 100;
+	int Tiredness = 0;
 };
 

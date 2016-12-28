@@ -2,7 +2,7 @@
 #include "DockingDoors.h"
 
 
-DockingDoors::DockingDoors() : overlayTexture("Resources\\oxygen.png")
+DockingDoors::DockingDoors() : overlayTexture("Resources\\GUI\\Docking\\overlay.png")
 {
 }
 
@@ -17,69 +17,93 @@ void DockingDoors::placeDockingDoors(SDL_Renderer* renderer, Level& level)
 
 	renderOverlay(renderer, level);
 
-
 }
 
-void DockingDoors::placeEntryPath(Level& level, int xPos, int yPos)
+void DockingDoors::placeEntryPath(Level& level, int orientation)
 {
-	if (xPos > 0 && xPos < level.getLevelWidth() && yPos > 0 && yPos < level.getLevelHeight())
-		level.grid[xPos / level.getCellSize()][yPos / level.getCellSize()]->isDockingPath = true;
+
+
+	int mouseX, mouseY;
+	SDL_GetMouseState(&mouseX, &mouseY);
+
+	if (orientation == 0)
+	{
+		for (int x = 0; x < mouseX / level.getCellSize(); x++)
+		{
+			if (x > 0 && x < level.getLevelWidth())
+				level.grid[x][mouseY / level.getCellSize()]->isDockingPath = true;
+
+		}
+	}
+	else if (orientation == 1)
+	{
+		for (int x = mouseX / level.getCellSize(); x < level.getLevelWidth(); x++)
+		{
+			if (x > 0 && x < level.getLevelWidth())
+				level.grid[x][mouseY / level.getCellSize()]->isDockingPath = true;
+
+		}
+	}
+
 }
 
 void DockingDoors::renderOverlay(SDL_Renderer* renderer, Level& level)
 {
 	// left
+	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	int cellSize = level.getCellSize();
 	int mouseX, mouseY;
-	bool placeOnlyOnce = true;
+	SDL_GetMouseState(&mouseX, &mouseY);
+
 	if (dockOrientation == 0)
 	{
-		SDL_GetMouseState(&mouseX, &mouseY);
-
-		for (int x = -level.getLevelWidth(); x < 0; x++)
+		for (int x = 0; x <= mouseX / level.getCellSize(); x++)
 		{
 			for (int y = -1; y < 2; y++)
 			{
-				int xPos = mouseX + x * level.getCellSize();
+				int xPos =  x * level.getCellSize();
 				int yPos = mouseY + y * level.getCellSize();
+
+
+				overlayTexture.alterTransparency(50);
 				overlayTexture.render(renderer, xPos, yPos, level.getCellSize(), level.getCellSize());
+
 				if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 				{
-					if (placeOnlyOnce)
-					{
-						placeEntryPath(level, xPos, yPos);
-						placeOnlyOnce = false;
-					}
-					
+					placeEntryPath(level, dockOrientation);
 				}
+
 			}
 
 		}
 	}
 
-	// Right
 	if (dockOrientation == 1)
 	{
-		SDL_GetMouseState(&mouseX, &mouseY);
 
-		for (int x = 0; x < level.getLevelWidth(); x++)
+		for (int x = mouseX / level.getCellSize(); x <= level.getLevelWidth(); x++)
 		{
 			for (int y = -1; y < 2; y++)
 			{
-				int xPos = mouseX + x * level.getCellSize();
+				int xPos = x * level.getCellSize();
 				int yPos = mouseY + y * level.getCellSize();
+
+
+				overlayTexture.alterTransparency(50);
 				overlayTexture.render(renderer, xPos, yPos, level.getCellSize(), level.getCellSize());
+
 				if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 				{
-					if (placeOnlyOnce)
-					{
-						placeEntryPath(level, xPos, yPos);
-						placeOnlyOnce = false;
-					}
+					placeEntryPath(level, dockOrientation);
 				}
+
 			}
+
+
 		}
 	}
+
+
 }
 
 void DockingDoors::changeOrientation()
