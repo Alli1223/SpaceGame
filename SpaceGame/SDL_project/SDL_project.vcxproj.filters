@@ -100,7 +100,9 @@
     <ClCompile Include="DockingDoors.cpp">
       <Filter>Source Files\Dock</Filter>
     </ClCompile>
-    <ClCompile Include="Icon.cpp" />
+    <ClCompile Include="Icon.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -208,7 +210,9 @@
     <ClInclude Include="DockingDoors.h">
       <Filter>Headers\Dock</Filter>
     </ClInclude>
-    <ClInclude Include="Icon.h" />
+    <ClInclude Include="Icon.h">
+      <Filter>Headers\GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SDL_project.rc" />

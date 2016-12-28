@@ -14,6 +14,7 @@ public:
 	void DockingDoors::changeOrientation();
 	void DockingDoors::renderOverlay(SDL_Renderer* renderer, Level& level);
 	void DockingDoors::placeEntryPath(Level& level, int orientation);
+	void DockingDoors::placeAirlockDoor(Level& level, int x, int y);
 
 	bool placeOnlyOnce = true;
 };

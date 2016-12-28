@@ -31,13 +31,15 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 		for (int i = 0; i <= numberOfIcons; i++)
 		{
 			Icon icon;
-			icon.setX(toobarIconXPos);
-			icon.setY(toolbarYpos);
+
+			auto sharedIcon = std::make_shared<Icon>(icon);
+			sharedIcon->setX(toobarIconXPos);
+			sharedIcon->setY(toolbarYpos);
 			toobarIconXPos = toobarIconXPos + toolbarIconSize * 2;
 
-			icon.setIconID(i);
+			sharedIcon->setIconID(i);
 
-			allIcons.push_back(icon);
+			allIcons.push_back(sharedIcon);
 		}
 		doOnce = false;
 	}
@@ -66,27 +68,27 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 	{
 
 		//ICON ONE
-		if (icon.getIconID() == 1)
+		if (icon->getIconID() == 1)
 		{
-			roomCell.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
+			roomCell.render(renderer, icon->getX(), icon->getY(), toolbarIconSize, toolbarIconSize);
 
 
-			if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+			if (mouseX > icon->getX() - (toolbarIconSize / 2) && mouseX < icon->getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 			{
-				roomCell.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+				roomCell.render(renderer, icon->getX(), icon->getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
 				if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 				{
 					setToolbarSelection(1);
 				}
 			}
 		}
-		if (icon.getIconID() == 2)
+		if (icon->getIconID() == 2)
 		{
 			// ICON TWO
-			emptyCellIcon.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
-			if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+			emptyCellIcon.render(renderer, icon->getX(), icon->getY(), toolbarIconSize, toolbarIconSize);
+			if (mouseX > icon->getX() - (toolbarIconSize / 2) && mouseX < icon->getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 			{
-				emptyCellIcon.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+				emptyCellIcon.render(renderer, icon->getX(), icon->getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
 				if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 				{
 					setToolbarSelection(2);
@@ -94,14 +96,14 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 			}
 		}
 		// ICON THREE
-		if (icon.getIconID() == 3)
+		if (icon->getIconID() == 3)
 		{
 			if (numberOfItem3 > 0)
 			{
-				DoorTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
-				if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getY() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+				DoorTexture.render(renderer, icon->getX(), icon->getY(), toolbarIconSize, toolbarIconSize);
+				if (mouseX > icon->getX() - (toolbarIconSize / 2) && mouseX < icon->getY() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 				{
-					DoorTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+					DoorTexture.render(renderer, icon->getX(), icon->getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
 					if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
 						setToolbarSelection(3);
@@ -110,15 +112,15 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 			}
 		}
 		//ICON FOUR
-		if (icon.getIconID() == 4)
+		if (icon->getIconID() == 4)
 		{
 			if (numberOfItem4 > 0)
 			{
-				HydroponicsIconTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
-				if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+				HydroponicsIconTexture.render(renderer, icon->getX(), icon->getY(), toolbarIconSize, toolbarIconSize);
+				if (mouseX > icon->getX() - (toolbarIconSize / 2) && mouseX < icon->getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 				{
 
-					HydroponicsIconTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+					HydroponicsIconTexture.render(renderer, icon->getX(), icon->getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
 					if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
 						setToolbarSelection(4);
@@ -128,15 +130,15 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 		}
 
 		// ICON FIVE
-		if (icon.getIconID() == 5)
+		if (icon->getIconID() == 5)
 		{
 			if (numberOfItem5 > 0)
 			{
-				HydroponicsIconTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize, toolbarIconSize);
-				if (mouseX > icon.getX() - (toolbarIconSize / 2) && mouseX < icon.getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+				HydroponicsIconTexture.render(renderer, icon->getX(), icon->getY(), toolbarIconSize, toolbarIconSize);
+				if (mouseX > icon->getX() - (toolbarIconSize / 2) && mouseX < icon->getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 				{
 
-					HydroponicsIconTexture.render(renderer, icon.getX(), icon.getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
+					HydroponicsIconTexture.render(renderer, icon->getX(), icon->getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
 					if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))
 					{
 						setToolbarSelection(5);

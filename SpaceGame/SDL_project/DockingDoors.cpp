@@ -19,6 +19,14 @@ void DockingDoors::placeDockingDoors(SDL_Renderer* renderer, Level& level)
 
 }
 
+void DockingDoors::placeAirlockDoor(Level& level, int x, int y)
+{
+	if (level.grid[x][y]->isRoom)
+	{
+
+	}
+}
+
 void DockingDoors::placeEntryPath(Level& level, int orientation)
 {
 

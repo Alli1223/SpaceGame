@@ -48,7 +48,7 @@ public:
 	//! Is the texture for the door
 	Texture HydroponicsIconTexture;
 
-	std::vector<Icon> allIcons;
+	std::vector<std::shared_ptr<Icon>> allIcons;
 
 	// IconSize
 	int toolbarIconSize = 50;
