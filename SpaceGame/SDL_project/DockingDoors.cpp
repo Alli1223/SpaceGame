@@ -39,8 +39,21 @@ void DockingDoors::placeEntryPath(Level& level, int orientation)
 		for (int x = 0; x < mouseX / level.getCellSize(); x++)
 		{
 			if (x > 0 && x < level.getLevelWidth())
+			{
 				level.grid[x][mouseY / level.getCellSize()]->isDockingPath = true;
 
+				if (level.grid[x][mouseY / level.getCellSize()]->isRoom)
+				{
+					for (int y = -1; y == 1; y++)
+					{
+						if (y > 0 && y < level.getLevelHeight() && x > 0 && x < level.getLevelWidth())
+						{
+							level.grid[x][(mouseY / level.getCellSize()) + y]->isVerticalAirlock = true;
+						}
+							
+					}
+				}
+			}
 		}
 	}
 	else if (orientation == 1)
@@ -48,7 +61,9 @@ void DockingDoors::placeEntryPath(Level& level, int orientation)
 		for (int x = mouseX / level.getCellSize(); x < level.getLevelWidth(); x++)
 		{
 			if (x > 0 && x < level.getLevelWidth())
+			{
 				level.grid[x][mouseY / level.getCellSize()]->isDockingPath = true;
+			}
 
 		}
 	}

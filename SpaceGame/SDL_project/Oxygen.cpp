@@ -66,6 +66,10 @@ void Oxygen::update(Level& grid, int cellX, int cellY)
 							grid.grid[point.getX()][point.getY()]->setOxygenLevel(grid.grid[point.getX()][point.getY()]->getOxygenLevel() + oxygenSpreadRate);
 						}
 
+						/* if the neighbour has less oxygen then set the points oxygen level to one less
+						if(grid.grid[point.getX()][point.getY()]->getOxygenLevel() > grid.grid[neighbour.getX()][neighbour.getY()]->getOxygenLevel())
+							grid.grid[point.getX()][point.getY()]->setOxygenLevel(grid.grid[point.getX()][point.getY()]->getOxygenLevel() - oxygenSpreadRate);
+							*/
 
 						if (grid.grid[point.getX()][point.getY()]->isOnFire)
 						{

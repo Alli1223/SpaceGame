@@ -28,7 +28,9 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 	int toobarIconXPos = toolbarXpos + (toolbarIconSize * 2);
 	if (doOnce)
 	{
-		for (int i = 0; i <= numberOfIcons; i++)
+
+		// Set the icons position and ID
+		for (int i = 1; i <= numberOfIcons; i++)
 		{
 			Icon icon;
 
@@ -101,7 +103,7 @@ void ToolBar::RenderToolbar(SDL_Renderer* renderer, int WINDOW_WIDTH, int WINDOW
 			if (numberOfItem3 > 0)
 			{
 				DoorTexture.render(renderer, icon->getX(), icon->getY(), toolbarIconSize, toolbarIconSize);
-				if (mouseX > icon->getX() - (toolbarIconSize / 2) && mouseX < icon->getY() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
+				if (mouseX > icon->getX() - (toolbarIconSize / 2) && mouseX < icon->getX() + (toolbarIconSize / 2) && mouseY > toolbarYpos - toolbarIconSize / 2 && mouseY < toolbarYpos + toolbarSizeY / 2)
 				{
 					DoorTexture.render(renderer, icon->getX(), icon->getY(), toolbarIconSize + mouseOverSizeIncrease, toolbarIconSize + mouseOverSizeIncrease);
 					if (SDL_GetMouseState(&mouseX, &mouseY) & SDL_BUTTON(SDL_BUTTON_LEFT))

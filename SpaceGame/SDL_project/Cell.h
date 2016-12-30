@@ -55,6 +55,8 @@ public:
 	bool isVacuum = false;
 	//!Whether the cell is the dockingpath
 	bool isDockingPath = false;
+	//! Whether the cell is a vertical airlock
+	bool isVerticalAirlock = false;
 
 	//! cell Orientation
 	int cellOrientation = 9;

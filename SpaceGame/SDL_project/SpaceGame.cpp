@@ -67,7 +67,7 @@ void SpaceGame::run()
 
 	// Choose whether to generate or load a map
 	//mapLoader.LoadMap("Resources\\Map\\Default_map.txt", room);
-	mapLoader.generateMap(room, designroom);
+	//mapLoader.generateMap(room, designroom);
 
 	Oxygen oxygen;
 	Fire fire;
@@ -331,6 +331,11 @@ void SpaceGame::run()
 								roomCell.render(renderer, xPos, yPos, cellSize, cellSize);
 								oxygenTex.render(renderer, xPos, yPos, cellSize, cellSize);
 								goalTexture.render(renderer, xPos, yPos, cellSize, cellSize);
+							}
+							if (room.grid[x][y]->isVerticalAirlock)
+							{
+								closedDoorTexture.render(renderer, xPos, yPos, cellSize, cellSize);
+								
 							}
 							// Fog of war for the NPC
 							if (NpcOne.getX() / cellSize <= characterOne.getX() / cellSize + fogOfWar && NpcOne.getX() / cellSize >= characterOne.getX() / cellSize - fogOfWar)
