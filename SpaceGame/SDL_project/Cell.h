@@ -57,6 +57,8 @@ public:
 	bool isDockingPath = false;
 	//! Whether the cell is a vertical airlock
 	bool isVerticalAirlock = false;
+	//! Whether the cell is a airlock side
+	bool isAirlockWall = false;
 
 	//! cell Orientation
 	int cellOrientation = 9;

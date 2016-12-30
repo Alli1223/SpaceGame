@@ -83,6 +83,7 @@ void SpaceGame::run()
 	Hydroponics hydroponics;
 	EscapeMenu escapemenu;
 	DockingDoors dockingdoors;
+	ShipManager shipmanager;
 	
 
 	//Character needs a pointer to the room to get the state
@@ -334,8 +335,11 @@ void SpaceGame::run()
 							}
 							if (room.grid[x][y]->isVerticalAirlock)
 							{
-								closedDoorTexture.render(renderer, xPos, yPos, cellSize, cellSize);
-								
+								healthPack.render(renderer, xPos, yPos, cellSize, cellSize);
+							}
+							if (room.grid[x][y]->isAirlockWall)
+							{
+								goalTexture.render(renderer, xPos, yPos, cellSize, cellSize);
 							}
 							// Fog of war for the NPC
 							if (NpcOne.getX() / cellSize <= characterOne.getX() / cellSize + fogOfWar && NpcOne.getX() / cellSize >= characterOne.getX() / cellSize - fogOfWar)
@@ -423,6 +427,9 @@ void SpaceGame::run()
 		}
 		// Render the vector of hydroponics
 		hydroponics.renderItems(renderer,room, allHydroponicsFarms);
+
+		shipmanager.shipTimer(room, allShips);
+		shipmanager.renderShip(allShips, renderer);
 
 		// If the character has died the game over screen is displayed
 		if (!characterOne.isAlive)

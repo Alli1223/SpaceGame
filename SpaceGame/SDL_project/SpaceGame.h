@@ -23,6 +23,7 @@
 #include "Hydroponics.h"
 #include "EscapeMenu.h"
 #include "DockingDoors.h"
+#include "ShipManager.h"
 
 //! The main class
 /*!
@@ -57,6 +58,10 @@ public:
 	
 	//! Contains a list of all the hydroponic farms
 	std::vector<Hydroponics> allHydroponicsFarms;
+
+	//! Contains a list of all the ship
+	std::vector<Ship> allShips;
+
 
 	//! The window width 
 	int WINDOW_WIDTH = gameSettings.WINDOW_WIDTH;

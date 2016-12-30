@@ -29,8 +29,6 @@ void DockingDoors::placeAirlockDoor(Level& level, int x, int y)
 
 void DockingDoors::placeEntryPath(Level& level, int orientation)
 {
-
-
 	int mouseX, mouseY;
 	SDL_GetMouseState(&mouseX, &mouseY);
 
@@ -38,21 +36,29 @@ void DockingDoors::placeEntryPath(Level& level, int orientation)
 	{
 		for (int x = 0; x < mouseX / level.getCellSize(); x++)
 		{
-			if (x > 0 && x < level.getLevelWidth())
+			if (x >= 0 && x <= level.getLevelWidth())
 			{
 				level.grid[x][mouseY / level.getCellSize()]->isDockingPath = true;
 
+
 				if (level.grid[x][mouseY / level.getCellSize()]->isRoom)
 				{
-					for (int y = -1; y == 1; y++)
+
+					for (int y = -1; y <= 1; y++)
 					{
-						if (y > 0 && y < level.getLevelHeight() && x > 0 && x < level.getLevelWidth())
+						level.grid[x][mouseY / level.getCellSize() + y]->isVerticalAirlock = true;
+						if (y == -1)
+							level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
+						else if (y == 1)
+							level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
+						else
 						{
-							level.grid[x][(mouseY / level.getCellSize()) + y]->isVerticalAirlock = true;
+							level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = true;
 						}
-							
+
 					}
 				}
+
 			}
 		}
 	}
@@ -60,9 +66,26 @@ void DockingDoors::placeEntryPath(Level& level, int orientation)
 	{
 		for (int x = mouseX / level.getCellSize(); x < level.getLevelWidth(); x++)
 		{
-			if (x > 0 && x < level.getLevelWidth())
+			if (x >= 0 && x <= level.getLevelWidth())
 			{
 				level.grid[x][mouseY / level.getCellSize()]->isDockingPath = true;
+				if (level.grid[x][mouseY / level.getCellSize()]->isRoom)
+				{
+
+					for (int y = -1; y <= 1; y++)
+					{
+						level.grid[x][mouseY / level.getCellSize() + y]->isVerticalAirlock = true;
+						if (y == -1)
+							level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
+						else if (y == 1)
+							level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
+						else
+						{
+							level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = true;
+						}
+
+					}
+				}
 			}
 
 		}

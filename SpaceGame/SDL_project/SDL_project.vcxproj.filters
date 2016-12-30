@@ -103,6 +103,15 @@
     <ClCompile Include="Icon.cpp">
       <Filter>Source Files\GUI</Filter>
     </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Source Files\Dock</Filter>
+    </ClCompile>
+    <ClCompile Include="CargoShip.cpp">
+      <Filter>Source Files\Dock\cargoShip</Filter>
+    </ClCompile>
+    <ClCompile Include="ShipManager.cpp">
+      <Filter>Source Files\Dock</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -212,6 +221,15 @@
     </ClInclude>
     <ClInclude Include="Icon.h">
       <Filter>Headers\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Headers\Dock</Filter>
+    </ClInclude>
+    <ClInclude Include="CargoShip.h">
+      <Filter>Headers\Dock\CargoShip</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipManager.h">
+      <Filter>Headers\Dock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
