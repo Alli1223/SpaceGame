@@ -60,12 +60,18 @@ void Oxygen::update(Level& grid, int cellX, int cellY)
 					// Cannot go thrugh closed doors
 					if (!grid.grid[point.getX()][point.getY()]->isOpenDoor || !grid.grid[neighbour.getX()][neighbour.getY()]->isOpenDoor || !grid.grid[point.getX()][point.getY()]->isClosedDoor || !grid.grid[neighbour.getX()][neighbour.getY()]->isClosedDoor)
 					{
-						//if the neighbour has 100 oxygen and current point has less than 100 increase current point
+						/*if the neighbour has 100 oxygen and current point has less than 100 increase current point
 						if (grid.grid[point.getX()][point.getY()]->getOxygenLevel() < 100 && grid.grid[neighbour.getX()][neighbour.getY()]->getOxygenLevel() == 100)
 						{
 							grid.grid[point.getX()][point.getY()]->setOxygenLevel(grid.grid[point.getX()][point.getY()]->getOxygenLevel() + oxygenSpreadRate);
 						}
+						*/
 
+						if (grid.grid[point.getX()][point.getY()]->getOxygenLevel() < grid.grid[neighbour.getX()][neighbour.getY()]->getOxygenLevel())
+						{
+							grid.grid[point.getX()][point.getY()]->setOxygenLevel(grid.grid[neighbour.getX()][neighbour.getY()]->getOxygenLevel());
+						}
+						
 						if (grid.grid[point.getX()][point.getY()]->isOnFire)
 						{
 							grid.grid[point.getX()][point.getY()]->oxygenLevel = 0;
@@ -91,8 +97,8 @@ std::vector<Point> Oxygen::getNeighbourCells(Point point, Level& grid)
 	Point bottomPoint(point.getX() - 1, point.getY() + 1);
 
 	result.push_back(leftPoint);
-	result.push_back(rightPoint);
 	result.push_back(topPoint);
+	result.push_back(rightPoint);
 	result.push_back(bottomPoint);
 
 	return result;

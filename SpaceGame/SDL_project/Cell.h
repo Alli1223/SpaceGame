@@ -42,7 +42,7 @@ public:
 	//! Represents the goal for the player
 	bool isGoal = false;
 	//! The oxygenLevel of the cell
-	int oxygenLevel = 100;
+	float oxygenLevel = 100;
 	//! Whether the cell is on fire
 	bool isOnFire = false;
 	//! Whether the cell is a hull breach

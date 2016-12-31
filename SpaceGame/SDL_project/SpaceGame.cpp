@@ -198,6 +198,8 @@ void SpaceGame::run()
 								oxygenTex.alterTransparency(room.grid[x][y]->oxygenLevel);
 								roomCell.render(renderer, xPos, yPos, cellSize, cellSize);
 								oxygenTex.render(renderer, xPos, yPos, cellSize, cellSize);
+								if(room.grid[x][y]->getOxygenLevel() > 0 && room.grid[x][y]->getOxygenLevel() <= 100)
+									room.grid[x][y]->setOxygenLevel(room.grid[x][y]->getOxygenLevel() - 0.01);
 							}
 							if (!room.grid[x][y]->isRoom)
 							{
