@@ -172,7 +172,6 @@ bool Map::generateRoom(Level level, int size, int entranceX, int entranceY, char
 			{
 				room[x][y]->isHullBreach = true;
 				room[x][y]->oxygenLevel = 0;
-				room[x][y]->isVacuum = true;
 			}
 			if (randomOxygenTankChance == 0 && !roomVector.empty())
 			{

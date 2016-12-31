@@ -22,6 +22,8 @@ void DockingDoors::placeDockingDoors(SDL_Renderer* renderer, Level& level)
 void DockingDoors::placeAirlockDoor(Level& level, int x, int y, int mouseY)
 {
 	level.grid[x][mouseY / level.getCellSize() + y]->isVerticalAirlock = true;
+
+
 	if (y == -1)
 		level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
 	else if (y == 1)
@@ -29,6 +31,7 @@ void DockingDoors::placeAirlockDoor(Level& level, int x, int y, int mouseY)
 	else
 	{
 		level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = true;
+		level.grid[x][mouseY / level.getCellSize() + y]->isRoom = true;
 	}
 }
 

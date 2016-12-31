@@ -6,6 +6,7 @@ SpaceGame::SpaceGame()
 	// Texture file locations
 	: roomCell("Resources\\roomSprites\\texturePack\\center.png"), emptyCell("Resources\\roomSprites\\emptyCell.png"),
 	topRoomCell("Resources\\roomSprites\\texturePack\\top.png"), topRightRoomCell("Resources\\roomSprites\\texturePack\\topRight.png"), rightRoomCell("Resources\\roomSprites\\texturePack\\right.png"), bottomRightRoomCell("Resources\\roomSprites\\texturePack\\bottomRight.png"), bottomRoomCell("Resources\\roomSprites\\texturePack\\bottom.png"), bottomLeftRoomCell("Resources\\roomSprites\\texturePack\\bottomLeft.png"), leftRoomCell("Resources\\roomSprites\\texturePack\\left.png"), topLeftRoomCell("Resources\\roomSprites\\texturePack\\topLeft.png"),
+	cargoBayTexture("Resources\\roomSprites\\texturePack\\cargoBayStorage.png"), cargoTexture("Resources\\roomSprites\\crate1.png"),
 	characterTex("Resources\\crew2.png"), characterLeft("Resources\\Character\\crewLeft.png"), characterRight("Resources\\Character\\crewRight.png"), characterUp("Resources\\Character\\crewUp.png"), characterDown("Resources\\Character\\crewDown.png"),
 	npcLeft("Resources\\Character\\npcLeft.png"), npcRight("Resources\\Character\\npcRight.png"), npcUp("Resources\\Character\\npcUp.png"), npcDown("Resources\\Character\\npcDown.png"),
 	NpcTex("Resources\\Character\\NPC.png"),
@@ -168,6 +169,11 @@ void SpaceGame::run()
 		characterInteraction.Interaction(room, characterOne, oxygen);
 		characterInteraction.Interaction(room, NpcOne, oxygen);
 
+		// ship management
+		shipmanager.shipTimer(room, allShips);
+		// Ship rendering
+		shipmanager.renderShip(allShips, renderer);
+
 		for (int x = 0; x < room.grid.size(); x++)
 		{
 			for (int y = 0; y < room.grid[x].size(); y++)
@@ -199,7 +205,7 @@ void SpaceGame::run()
 								roomCell.render(renderer, xPos, yPos, cellSize, cellSize);
 								oxygenTex.render(renderer, xPos, yPos, cellSize, cellSize);
 								if(room.grid[x][y]->getOxygenLevel() > 0 && room.grid[x][y]->getOxygenLevel() <= 100)
-									room.grid[x][y]->setOxygenLevel(room.grid[x][y]->getOxygenLevel() - 0.01);
+									room.grid[x][y]->setOxygenLevel(room.grid[x][y]->getOxygenLevel() - 0.0001);
 							}
 							if (!room.grid[x][y]->isRoom)
 							{
@@ -337,11 +343,21 @@ void SpaceGame::run()
 							}
 							if (room.grid[x][y]->isVerticalAirlock)
 							{
-								healthPack.render(renderer, xPos, yPos, cellSize, cellSize);
+								closedDoorTexture.render(renderer, xPos, yPos, cellSize, cellSize);
 							}
 							if (room.grid[x][y]->isAirlockWall)
 							{
 								goalTexture.render(renderer, xPos, yPos, cellSize, cellSize);
+							}
+							if (room.grid[x][y]->isShipCargoBay)
+							{
+								oxygenTex.alterTransparency(room.grid[x][y]->oxygenLevel);
+								cargoBayTexture.render(renderer, xPos, yPos, cellSize, cellSize);
+								oxygenTex.render(renderer, xPos, yPos, cellSize, cellSize);
+							}
+							if (room.grid[x][y]->isCargo)
+							{
+								cargoTexture.render(renderer, xPos, yPos, cellSize, cellSize);
 							}
 							// Fog of war for the NPC
 							if (NpcOne.getX() / cellSize <= characterOne.getX() / cellSize + fogOfWar && NpcOne.getX() / cellSize >= characterOne.getX() / cellSize - fogOfWar)
@@ -432,8 +448,7 @@ void SpaceGame::run()
 
 
 
-		shipmanager.shipTimer(room, allShips);
-		shipmanager.renderShip(allShips, renderer);
+		
 
 		// If the character has died the game over screen is displayed
 		if (!characterOne.isAlive)

@@ -33,7 +33,7 @@ public:
 	//! Sets the Cell's oxygenLevel
 	int setOxygenLevel(int newOxygenLevel) { return oxygenLevel = newOxygenLevel; }
 
-	//! Whether the cell is part of a roomm
+	//! Whether the cell is part of a room
 	bool isRoom = false;
 	//! Whether the cell is a door is open
 	bool isOpenDoor = false;
@@ -51,14 +51,16 @@ public:
 	bool isOxygenTank = false;
 	//! Whether the cell is an Fire extengusher
 	bool isHealthPack = false;
-	//! Whether the cell is a vacuum
-	bool isVacuum = false;
 	//!Whether the cell is the dockingpath
 	bool isDockingPath = false;
+	//! Whether the cell is part of the ships cargo bay
+	bool isShipCargoBay = false;
 	//! Whether the cell is a vertical airlock
 	bool isVerticalAirlock = false;
 	//! Whether the cell is a airlock side
 	bool isAirlockWall = false;
+	//! Whetehr the cell is cargo
+	bool isCargo = false;
 
 	//! cell Orientation
 	int cellOrientation = 9;

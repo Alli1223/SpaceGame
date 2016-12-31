@@ -120,6 +120,11 @@ private:
 	Texture fireTexture;
 	//! Is the texture for the background
 	Texture backgroundTexture;
+
+	//! Is the texture for the cargoBay
+	Texture cargoBayTexture;
+	//! Is the texture for the cargo
+	Texture cargoTexture;
 	
 	
 	//! Is the texture for hull breaches

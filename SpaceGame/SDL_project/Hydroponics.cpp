@@ -2,7 +2,7 @@
 #include "Hydroponics.h"
 
 
-Hydroponics::Hydroponics() :hydroponicsTexture("Resources\\Items\\Hydroponics.png")
+Hydroponics::Hydroponics() :hydroponicsTexture("Resources\\SpawnItems\\hydroponics01.png")
 {
 	
 }

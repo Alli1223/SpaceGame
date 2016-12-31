@@ -18,6 +18,8 @@ public:
 	void createShip(std::vector<Ship>& allShips);
 
 	void renderShip(std::vector<Ship>& allships, SDL_Renderer* renderer);
+
+	void shipDocked(Level& level, Ship& ship);
 	bool thereIsDockingPath = false;
 
 	bool doOnce = true;
