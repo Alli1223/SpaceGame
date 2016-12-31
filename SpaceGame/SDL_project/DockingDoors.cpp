@@ -25,9 +25,15 @@ void DockingDoors::placeAirlockDoor(Level& level, int x, int y, int mouseY)
 
 
 	if (y == -1)
+	{
 		level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
+		level.grid[x][mouseY / level.getCellSize() + y]->isRoom = false;
+	}
 	else if (y == 1)
+	{
 		level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
+		level.grid[x][mouseY / level.getCellSize() + y]->isRoom = false;
+	}
 	else
 	{
 		level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = true;

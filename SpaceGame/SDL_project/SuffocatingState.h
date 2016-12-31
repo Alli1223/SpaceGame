@@ -26,6 +26,8 @@ public:
 private:
 	//! Decreases the character's health
 	void decreaseHealth(Character& character);
+	void decreaseOxygenreserves(Character& character);
+	void increaseOxygenreserves(Character& character);
 
 };
 

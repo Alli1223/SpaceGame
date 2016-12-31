@@ -79,6 +79,8 @@ void ShipManager::shipDocked(Level& level, Ship& ship)
 		{
 			level.grid[shipX + x][shipY + y]->isShipCargoBay = true;
 			level.grid[shipX + x][shipY + y]->isRoom = true;
+			level.grid[shipX + x][shipY + y]->oxygenLevel = 100;
+
 			if (ship.getAmountOfCargo() > 0)
 			{
 				if (rand() % ship.getAmountOfCargo() == 0)

@@ -24,7 +24,7 @@
 #include "EscapeMenu.h"
 #include "DockingDoors.h"
 #include "ShipManager.h"
-
+#include "PlayerStats.h"
 //! The main class
 /*!
 This is the main class where the game is laoded and run. 

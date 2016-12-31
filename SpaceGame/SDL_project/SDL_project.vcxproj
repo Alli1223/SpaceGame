@@ -175,6 +175,7 @@
     <ClInclude Include="NPC.h" />
     <ClInclude Include="ObjectiveManager.h" />
     <ClInclude Include="PathFinder.h" />
+    <ClInclude Include="PlayerStats.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="RoomDesign.h" />
     <ClInclude Include="Level.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="ObjectiveManager.cpp" />
     <ClCompile Include="PathFinder.cpp" />
+    <ClCompile Include="PlayerStats.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="RoomDesign.cpp" />
     <ClCompile Include="Level.cpp" />

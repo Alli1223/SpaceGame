@@ -35,6 +35,11 @@ public:
 	//! Sets the characters current speed
 	int setSpeed(int newSpeed) { return speed = newSpeed; }
 
+
+	//! Gets and Sets the characters hunger
+	double getHunger() { return Hunger; }
+	double setHunger(int newHunger) { return Hunger = newHunger; }
+
 	//Cell checking functions
 	//! Checks whether a cell is a room
 	bool isCellARoom(int x, int y);
@@ -62,7 +67,9 @@ public:
 	std::shared_ptr<Level> currentRoom;
 	
 	//! A double for the character's health
-	double health = 1000;
+	double health = 100;
+	//! A double for the character's stored oxygen
+	double charactersOxygen = 100;
 	//! Boolean for whether character is alive
 	bool isAlive = true; 
 	bool hasWon = false;
@@ -89,7 +96,7 @@ private:
 	//! Integer for the characters current speed
 	int speed = 3; 
 
-	int Hunger = 100;
+	double Hunger = 100;
 	int Tiredness = 0;
 };
 

@@ -85,6 +85,7 @@ void SpaceGame::run()
 	EscapeMenu escapemenu;
 	DockingDoors dockingdoors;
 	ShipManager shipmanager;
+	PlayerStats playerstats;
 	
 
 	//Character needs a pointer to the room to get the state
@@ -205,7 +206,7 @@ void SpaceGame::run()
 								roomCell.render(renderer, xPos, yPos, cellSize, cellSize);
 								oxygenTex.render(renderer, xPos, yPos, cellSize, cellSize);
 								if(room.grid[x][y]->getOxygenLevel() > 0 && room.grid[x][y]->getOxygenLevel() <= 100)
-									room.grid[x][y]->setOxygenLevel(room.grid[x][y]->getOxygenLevel() - 0.0001);
+									room.grid[x][y]->setOxygenLevel(room.grid[x][y]->getOxygenLevel() - 0.5);
 							}
 							if (!room.grid[x][y]->isRoom)
 							{
@@ -393,13 +394,14 @@ void SpaceGame::run()
 		SDL_SetRenderDrawColor(renderer, 255, 10, 128, 255);
 		drawPath(point, room);
 
-		// Renders the health and oxygen bar
+		/* Renders the health and oxygen bar above player
 		healthBar.render(renderer, characterOne.getX(), characterOne.getY() - 40, characterOne.health, 10);
 		healthBar.alterTransparency(150);
 		healthText.render(renderer, characterOne.getX(), characterOne.getY() - 40, 60, 20);
 		oxygenBar.render(renderer, characterOne.getX(), characterOne.getY() - 30, oxygen.getOxygenReserves() / 40, 10);
 		oxygenBar.alterTransparency(150);
 		oxygenText.render(renderer, characterOne.getX(), characterOne.getY() - 30, 60, 20);
+		*/
 
 
 		// player orientation
@@ -425,6 +427,9 @@ void SpaceGame::run()
 		// TOOLBAR
 		toolbar.ToolBarFunctionality(room, designroom, renderer, mouse_X, mouse_Y);
 		toolbar.RenderToolbar(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, mouse_X, mouse_Y);
+
+		playerstats.renderAndUpdatePlayerStats(renderer, characterOne, WINDOW_WIDTH, WINDOW_HEIGHT);
+
 		
 		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_LEFT) && toolbar.getToolbarSelection() == 4)
 		{

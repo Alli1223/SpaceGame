@@ -112,6 +112,9 @@
     <ClCompile Include="ShipManager.cpp">
       <Filter>Source Files\Dock</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerStats.cpp">
+      <Filter>Source Files\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -230,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="ShipManager.h">
       <Filter>Headers\Dock</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStats.h">
+      <Filter>Headers\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
