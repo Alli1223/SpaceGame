@@ -421,12 +421,14 @@ void SpaceGame::run()
 		{
 			if (toolbar.numberOfItem4 > 0)
 			{
-				dockingdoors.placeDockingDoors(renderer, room);
+					dockingdoors.placeDockingDoors(renderer, room);
 			}
 
 		}
 		// Render the vector of hydroponics
 		hydroponics.renderItems(renderer,room, allHydroponicsFarms);
+
+
 
 		shipmanager.shipTimer(room, allShips);
 		shipmanager.renderShip(allShips, renderer);

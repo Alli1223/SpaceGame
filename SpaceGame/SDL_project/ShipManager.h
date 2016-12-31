@@ -10,15 +10,19 @@ public:
 	~ShipManager();
 
 	//! Spawns a ship and moves it to the dock
-	void moveShipToDock(Ship& ship, int direction);
+	void moveShipToDock(Level& level, Ship& ship, int direction);
 
-	void shipTimer(Level& level, std::vector<Ship> allShips);
+	void shipTimer(Level& level, std::vector<Ship>& allShips);
 	void findShipSpawn(Level& level, Ship& ship);
 	bool shipAlreadySpawned = false;
+	void createShip(std::vector<Ship>& allShips);
 
-	void renderShip(std::vector<Ship> allships, SDL_Renderer* renderer);
+	void renderShip(std::vector<Ship>& allships, SDL_Renderer* renderer);
+	bool thereIsDockingPath = false;
 
-private:
+	bool doOnce = true;
 	
+	
+private:
 };
 

@@ -21,15 +21,17 @@ public:
 	std::string getShipStatus() { return shipStatus; }
 	std::string setShipStatus(std::string newShipStatus) { return shipStatus = newShipStatus; }
 
+	bool shipPlacedOnDockingPath = false;
+
+	bool isDocked = false;
 
 	void RenderShip(SDL_Renderer* renderer, Ship& ship);
-	void RenderShip(SDL_Renderer* renderer);
 
 	Texture CargoShipTexture;
 
 private:
 	int x, y;
-	int width = 100, height = 50;
+	int width = 200, height = 100;
 	std::string shipStatus = "NA";
 };
 

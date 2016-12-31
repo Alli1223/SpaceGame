@@ -11,26 +11,41 @@ ShipManager::~ShipManager()
 {
 }
 
-void ShipManager::shipTimer(Level& level, std::vector<Ship> allShips)
+void ShipManager::createShip(std::vector<Ship>& allShips)
 {
-	CargoShip shipOne;
-	
-	
-	if (shipAlreadySpawned)
-	{
-		findShipSpawn(level, shipOne);
-		shipAlreadySpawned = true;
-	}
-
+	Ship shipOne;
 	allShips.push_back(shipOne);
-
+	shipAlreadySpawned = true;
 }
 
-void ShipManager::renderShip(std::vector<Ship> allships, SDL_Renderer* renderer)
+void ShipManager::shipTimer(Level& level, std::vector<Ship>& allShips)
+{
+
+	if (!shipAlreadySpawned)
+	{
+		createShip(allShips);
+	}
+
+	if (!thereIsDockingPath)
+	{
+		for (int i = 0; i < allShips.size(); i++)
+			findShipSpawn(level, allShips[i]);
+	}
+
+	for (int i = 0; i < allShips.size(); i++)
+	{
+		if (thereIsDockingPath && !allShips[i].isDocked)
+		{
+			moveShipToDock(level, allShips[i], 1);
+		}
+	}
+}
+
+void ShipManager::renderShip(std::vector<Ship>& allships, SDL_Renderer* renderer)
 {
 	for each(auto ship in allships)
 	{
-		ship.RenderShip(renderer);
+		ship.RenderShip(renderer, ship);
 	}
 }
 
@@ -38,19 +53,15 @@ void ShipManager::renderShip(std::vector<Ship> allships, SDL_Renderer* renderer)
 
 void ShipManager::findShipSpawn(Level& level, Ship& ship)
 {
+	// find and set intital ship spawn position
 	for (int y = 0; y < level.getLevelHeight(); y++)
 	{
 		if (level.grid[0][y]->isDockingPath)
 		{
 			ship.setX(0);
-			ship.setY(y);
-			moveShipToDock(ship, 1);
-		}
-		if (level.grid[level.getLevelWidth()][y]->isDockingPath)
-		{
-			ship.setX(level.getLevelWidth());
-			ship.setY(y);
-			moveShipToDock(ship, -1);
+			ship.setY(y * level.getCellSize() + (level.getCellSize() / 2));
+			thereIsDockingPath = true;
+			ship.shipPlacedOnDockingPath = true;
 		}
 	}
 }
@@ -58,11 +69,13 @@ void ShipManager::findShipSpawn(Level& level, Ship& ship)
 
 
 
-void ShipManager::moveShipToDock(Ship& ship, int direction)
+void ShipManager::moveShipToDock(Level& level, Ship& ship, int direction)
 {
-	if (ship.getShipStatus() == "NA")
+	ship.setX(ship.getX() + direction);
+
+	if (level.grid[ship.getX() / level.getCellSize()][ship.getY() / level.getCellSize()]->isVerticalAirlock)
 	{
-		ship.setShipStatus("Docking");
-		ship.setX(ship.getX() + direction);
+		ship.setX(ship.getX());
+		ship.isDocked = true;
 	}
 }

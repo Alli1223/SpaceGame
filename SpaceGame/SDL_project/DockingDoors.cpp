@@ -19,11 +19,16 @@ void DockingDoors::placeDockingDoors(SDL_Renderer* renderer, Level& level)
 
 }
 
-void DockingDoors::placeAirlockDoor(Level& level, int x, int y)
+void DockingDoors::placeAirlockDoor(Level& level, int x, int y, int mouseY)
 {
-	if (level.grid[x][y]->isRoom)
+	level.grid[x][mouseY / level.getCellSize() + y]->isVerticalAirlock = true;
+	if (y == -1)
+		level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
+	else if (y == 1)
+		level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
+	else
 	{
-
+		level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = true;
 	}
 }
 
@@ -32,6 +37,7 @@ void DockingDoors::placeEntryPath(Level& level, int orientation)
 	int mouseX, mouseY;
 	SDL_GetMouseState(&mouseX, &mouseY);
 
+	if(mouseY < level.getLevelHeight() * level.getCellSize() - 100)
 	if (orientation == 0)
 	{
 		for (int x = 0; x < mouseX / level.getCellSize(); x++)
@@ -46,15 +52,7 @@ void DockingDoors::placeEntryPath(Level& level, int orientation)
 
 					for (int y = -1; y <= 1; y++)
 					{
-						level.grid[x][mouseY / level.getCellSize() + y]->isVerticalAirlock = true;
-						if (y == -1)
-							level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
-						else if (y == 1)
-							level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
-						else
-						{
-							level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = true;
-						}
+						placeAirlockDoor(level, x, y, mouseY);
 
 					}
 				}
@@ -74,15 +72,7 @@ void DockingDoors::placeEntryPath(Level& level, int orientation)
 
 					for (int y = -1; y <= 1; y++)
 					{
-						level.grid[x][mouseY / level.getCellSize() + y]->isVerticalAirlock = true;
-						if (y == -1)
-							level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
-						else if (y == 1)
-							level.grid[x][mouseY / level.getCellSize() + y]->isAirlockWall = true;
-						else
-						{
-							level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = true;
-						}
+						placeAirlockDoor(level, x, y, mouseY);
 
 					}
 				}
@@ -107,7 +97,7 @@ void DockingDoors::renderOverlay(SDL_Renderer* renderer, Level& level)
 		{
 			for (int y = -1; y < 2; y++)
 			{
-				int xPos =  x * level.getCellSize();
+				int xPos = x * level.getCellSize();
 				int yPos = mouseY + y * level.getCellSize();
 
 
@@ -148,8 +138,6 @@ void DockingDoors::renderOverlay(SDL_Renderer* renderer, Level& level)
 
 		}
 	}
-
-
 }
 
 void DockingDoors::changeOrientation()

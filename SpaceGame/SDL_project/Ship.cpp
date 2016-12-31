@@ -17,8 +17,3 @@ void Ship::RenderShip(SDL_Renderer* renderer, Ship& ship)
 {
 	CargoShipTexture.render(renderer, ship.getX(), ship.getY(), ship.getWidth(), ship.getHeight());
 }
-
-void Ship::RenderShip(SDL_Renderer* renderer)
-{
-	
-}
