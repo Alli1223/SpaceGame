@@ -28,7 +28,7 @@ void PlayerStats::renderAndUpdatePlayerStats(SDL_Renderer* renderer, Character& 
 	playerHealth.render(renderer, barXPos, barYPos , character.health + barWidth, barHeight);
 	
 	oxygenText.alterTransparency(200);
-	playerOxygen.render(renderer, barXPos, barYPos + barHeight * 2, character.charactersOxygen + barWidth, barHeight);
+	playerOxygen.render(renderer, barXPos, barYPos + barHeight * 2, character.charactersOxygenReserves + barWidth, barHeight);
 	oxygenText.render(renderer, barXPos, barYPos + barHeight, 50 + barWidth, barHeight);
 
 	playerHunger.render(renderer, barXPos, barYPos + barHeight * 4, character.getHunger() + barWidth, barHeight);

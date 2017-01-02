@@ -69,7 +69,7 @@ public:
 	//! A double for the character's health
 	double health = 100;
 	//! A double for the character's stored oxygen
-	double charactersOxygen = 100;
+	double charactersOxygenReserves = 100;
 	//! Boolean for whether character is alive
 	bool isAlive = true; 
 	bool hasWon = false;

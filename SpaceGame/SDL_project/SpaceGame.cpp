@@ -146,7 +146,7 @@ void SpaceGame::run()
 		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_RIGHT))
 		{
 			//oxygen.removeOxygen(mouse_X, mouse_Y, cellSize, room);
-
+			path.erase(path.begin(), path.end());
 			// set the start and end points
 			if (NpcOne.getX() / cellSize >= 0 && NpcOne.getY() / cellSize >= 0)
 			{
@@ -384,6 +384,9 @@ void SpaceGame::run()
 									}
 								}
 							}
+
+							// Update hydroponics
+							hydroponics.update(room, allHydroponicsFarms, x, y);
 						}
 					}
 				}
@@ -435,8 +438,8 @@ void SpaceGame::run()
 		{
 			if (room.grid[mouse_X / cellSize][mouse_Y / cellSize]->isRoom && toolbar.numberOfItem4 > 0)
 			{
-				hydroponics.spawnItem(renderer, room, allHydroponicsFarms, mouse_X, mouse_Y);
-				toolbar.numberOfItem4--;
+				hydroponics.spawnHydroponicBase(renderer, room, allHydroponicsFarms, mouse_X, mouse_Y);
+				//toolbar.numberOfItem4--;
 			}
 		}
 
@@ -450,6 +453,7 @@ void SpaceGame::run()
 		}
 		// Render the vector of hydroponics
 		hydroponics.renderItems(renderer,room, allHydroponicsFarms);
+		
 
 
 

@@ -13,15 +13,16 @@ ShipManager::~ShipManager()
 
 void ShipManager::createShip(std::vector<Ship>& allShips)
 {
-	Ship shipOne;
+	CargoShip shipOne;
 	allShips.push_back(shipOne);
 	shipAlreadySpawned = true;
 }
 
 void ShipManager::shipTimer(Level& level, std::vector<Ship>& allShips)
 {
-
-	if (!shipAlreadySpawned)
+	int timer = SDL_GetTicks() / 1000;
+	
+	if (!shipAlreadySpawned && timer > 30)
 	{
 		createShip(allShips);
 	}

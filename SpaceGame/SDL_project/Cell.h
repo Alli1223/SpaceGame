@@ -61,6 +61,9 @@ public:
 	bool isAirlockWall = false;
 	//! Whetehr the cell is cargo
 	bool isCargo = false;
+	//! Whether the cell is a hydroponics bay
+	bool isHydroponicsBay = false;
+	
 
 	//! cell Orientation
 	int cellOrientation = 9;

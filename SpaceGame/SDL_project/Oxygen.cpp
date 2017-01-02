@@ -67,7 +67,7 @@ void Oxygen::update(Level& grid, int cellX, int cellY)
 						}
 						*/
 
-						if (grid.grid[point.getX()][point.getY()]->getOxygenLevel() < grid.grid[neighbour.getX()][neighbour.getY()]->getOxygenLevel())
+						if (grid.grid[point.getX()][point.getY()]->getOxygenLevel() > grid.grid[neighbour.getX()][neighbour.getY()]->getOxygenLevel())
 						{
 							grid.grid[point.getX()][point.getY()]->setOxygenLevel(grid.grid[neighbour.getX()][neighbour.getY()]->getOxygenLevel());
 						}

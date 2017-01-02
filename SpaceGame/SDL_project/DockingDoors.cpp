@@ -36,8 +36,8 @@ void DockingDoors::placeAirlockDoor(Level& level, int x, int y, int mouseY)
 	}
 	else
 	{
-		level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = true;
-		level.grid[x][mouseY / level.getCellSize() + y]->isRoom = true;
+		level.grid[x][mouseY / level.getCellSize() + y]->isClosedDoor = false;
+		level.grid[x][mouseY / level.getCellSize() + y]->isOpenDoor = true;
 	}
 }
 
