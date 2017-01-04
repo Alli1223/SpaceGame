@@ -63,6 +63,7 @@ public:
 	bool isCargo = false;
 	//! Whether the cell is a hydroponics bay
 	bool isHydroponicsBay = false;
+	std::string hydroponicsOrientation = "NA";
 	
 
 	//! cell Orientation

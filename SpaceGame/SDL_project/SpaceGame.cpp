@@ -159,6 +159,11 @@ void SpaceGame::run()
 			traversepath.pathComplete = true;
 		}
 
+		if (SDL_GetMouseState(&mouse_X, &mouse_Y) & SDL_BUTTON(SDL_BUTTON_MIDDLE))
+		{
+			room.grid[mouse_X / cellSize][mouse_Y / cellSize]->oxygenLevel = 100;
+		}
+
 		if (traversepath.pathComplete)
 		{
 			point = traversepath.getNextPoint(path);
@@ -170,7 +175,7 @@ void SpaceGame::run()
 		characterInteraction.Interaction(room, characterOne, oxygen);
 		characterInteraction.Interaction(room, NpcOne, oxygen);
 
-		// ship management
+		// Ship management
 		shipmanager.shipTimer(room, allShips);
 		// Ship rendering
 		shipmanager.renderShip(allShips, renderer);

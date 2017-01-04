@@ -22,31 +22,28 @@ void Hydroponics::spawnHydroponicBase(SDL_Renderer* renderer, Level& level, std:
 
 		if (xPos > 0 && yPos > 0 && xPos < level.getLevelWidth() && yPos < level.getLevelHeight())
 		{
-			
+
 
 			// if there is hydro item to the left and right
 			if (level.grid[xPos + 1][yPos]->isHydroponicsBay && level.grid[xPos - 1][yPos]->isHydroponicsBay)
 			{
-				hydroponics.Orientation = "Centre";
+
+				hydroponics.Orientation = "Center";
 			}
 
-			if (level.grid[xPos][yPos]->isHydroponicsBay)
+
+			// If there is no hydro item to the left
+			if (!level.grid[xPos - 1][yPos]->isHydroponicsBay && level.grid[xPos + 1][yPos]->isHydroponicsBay)
 			{
-				// If there is no hydro item to the left
-				if (!level.grid[xPos - 1][yPos]->isHydroponicsBay)
-				{
-					hydroponics.Orientation = "Left";
-				}
-				//if there is no hydro item to right
-				else if (!level.grid[xPos + 1][yPos]->isHydroponicsBay)
-				{
-					hydroponics.Orientation = "Right";
-				}
+				hydroponics.Orientation = "Left";
+			}
+			//if there is no hydro item to right
+			else if (!level.grid[xPos + 1][yPos]->isHydroponicsBay && level.grid[xPos - 1][yPos]->isHydroponicsBay)
+			{
+				hydroponics.Orientation = "Right";
 			}
 
-			
 
-			hydroponicsTexture.render(renderer, x, y, getwidth(), getheight());
 			hydroponics.setX(xPos * level.getCellSize() + (level.getCellSize() - level.getCellSize() / 2));
 			hydroponics.setY(yPos *  level.getCellSize() + (level.getCellSize() - level.getCellSize() / 2));
 
@@ -63,6 +60,11 @@ void Hydroponics::update(Level& level, std::vector<Hydroponics>& allHydroponicsF
 	{
 		level.grid[x / level.getCellSize()][y / level.getCellSize()]->setOxygenLevel(level.grid[x / level.getCellSize()][y / level.getCellSize()]->getOxygenLevel() + amountOfOxygenProducing);
 	}
+
+	if (x > 0 && y > 0 && x < level.getLevelWidth() && y < level.getLevelHeight())
+	{
+		
+	}
 }
 
 void  Hydroponics::renderItems(SDL_Renderer* renderer, Level& level, std::vector<Hydroponics>& allHydroponicsFarms)
@@ -78,7 +80,7 @@ void  Hydroponics::renderItems(SDL_Renderer* renderer, Level& level, std::vector
 			leftHydroponics.render(renderer, allHydroponicsFarms[iter].getX(), allHydroponicsFarms[iter].getY(), allHydroponicsFarms[iter].getwidth(), allHydroponicsFarms[iter].getheight());
 		}
 		// if the bay is center orientation
-		else if (allHydroponicsFarms[iter].Orientation == "Centre")
+		else if (allHydroponicsFarms[iter].Orientation == "Center")
 		{
 			centerHydroponics.render(renderer, allHydroponicsFarms[iter].getX(), allHydroponicsFarms[iter].getY(), allHydroponicsFarms[iter].getwidth(), allHydroponicsFarms[iter].getheight());
 		}
