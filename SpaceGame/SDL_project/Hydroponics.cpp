@@ -2,7 +2,7 @@
 #include "Hydroponics.h"
 
 
-Hydroponics::Hydroponics() :hydroponicsTexture("Resources\\SpawnItems\\hydroponics01.png"), leftHydroponics("Resources\\SpawnItems\\Hydroponics\\HydroLeft.png"), centerHydroponics("Resources\\SpawnItems\\Hydroponics\\HydroCentre.png"), rightHydroponics("Resources\\SpawnItems\\Hydroponics\\HydroRight.png")
+Hydroponics::Hydroponics() :hydroponicsTexture("Resources\\SpawnItems\\goal2.png"), leftHydroponics("Resources\\SpawnItems\\Hydroponics\\HydroLeft.png"), centerHydroponics("Resources\\SpawnItems\\Hydroponics\\HydroCentre.png"), rightHydroponics("Resources\\SpawnItems\\Hydroponics\\HydroRight.png")
 {
 	
 }
@@ -54,12 +54,13 @@ void Hydroponics::spawnHydroponicBase(SDL_Renderer* renderer, Level& level, std:
 	}
 }
 
-void Hydroponics::update(Level& level, std::vector<Hydroponics>& allHydroponicsFarms, int x , int y)
+void Hydroponics::update(Level& level, std::vector<Hydroponics>& allHydroponicsFarms, int& x , int& y)
 {
 	if (isProducingOxygen && getHealth() > 0)
 	{
 		level.grid[x / level.getCellSize()][y / level.getCellSize()]->setOxygenLevel(level.grid[x / level.getCellSize()][y / level.getCellSize()]->getOxygenLevel() + amountOfOxygenProducing);
 	}
+
 
 	if (x > 0 && y > 0 && x < level.getLevelWidth() && y < level.getLevelHeight())
 	{
@@ -71,9 +72,10 @@ void  Hydroponics::renderItems(SDL_Renderer* renderer, Level& level, std::vector
 {
 	for (int iter = 0; iter < allHydroponicsFarms.size(); iter++)
 	{
-
-		hydroponicsTexture.render(renderer, allHydroponicsFarms[iter].getX(), allHydroponicsFarms[iter].getY(), allHydroponicsFarms[iter].getwidth(), allHydroponicsFarms[iter].getheight());
-
+		if (allHydroponicsFarms[iter].isProducingOxygen)
+		{
+			level.grid[allHydroponicsFarms[iter].getX() / level.getCellSize()][allHydroponicsFarms[iter].getY() / level.getCellSize()]->oxygenLevel = 100;
+		}
 		// if the bay is left orientation
 		if (allHydroponicsFarms[iter].Orientation == "Left")
 		{

@@ -81,7 +81,7 @@ void SpaceGame::run()
 	TraversePath traversepath;
 	ObjectiveManager objectivemanager;
 	ToolBar toolbar;
-	Hydroponics hydroponics;
+	auto hydroponics = std::make_shared<Hydroponics>();
 	EscapeMenu escapemenu;
 	DockingDoors dockingdoors;
 	ShipManager shipmanager;
@@ -200,6 +200,8 @@ void SpaceGame::run()
 						// Runs Oxygen spread function
 						oxygen.update(room, x, y);
 
+						//hydroponics Update
+						hydroponics->update(room, allHydroponicsFarms, x, y);
 
 						//RENDERING THE CELLS
 						if (true)
@@ -391,7 +393,7 @@ void SpaceGame::run()
 							}
 
 							// Update hydroponics
-							hydroponics.update(room, allHydroponicsFarms, x, y);
+							hydroponics->update(room, allHydroponicsFarms, x, y);
 						}
 					}
 				}
@@ -443,7 +445,7 @@ void SpaceGame::run()
 		{
 			if (room.grid[mouse_X / cellSize][mouse_Y / cellSize]->isRoom && toolbar.numberOfItem4 > 0)
 			{
-				hydroponics.spawnHydroponicBase(renderer, room, allHydroponicsFarms, mouse_X, mouse_Y);
+				hydroponics->spawnHydroponicBase(renderer, room, allHydroponicsFarms, mouse_X, mouse_Y);
 				//toolbar.numberOfItem4--;
 			}
 		}
@@ -457,7 +459,7 @@ void SpaceGame::run()
 
 		}
 		// Render the vector of hydroponics
-		hydroponics.renderItems(renderer,room, allHydroponicsFarms);
+		hydroponics->renderItems(renderer,room, allHydroponicsFarms);
 		
 
 
@@ -469,6 +471,7 @@ void SpaceGame::run()
 		{
 
 			//Death animation
+			//TODO: Fix the animation sequence
 			SDL_Surface* image = IMG_Load("Resources\\deathAnim.png");
 			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, image);
 
@@ -498,6 +501,7 @@ void SpaceGame::run()
 				gameOverText.render(renderer, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 			}
+			
 			//starts a new game
 			else
 			{

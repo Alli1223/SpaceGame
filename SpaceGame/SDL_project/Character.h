@@ -1,9 +1,6 @@
 #pragma once
 #include"Level.h"
 
-class WanderingState;
-class CharacterState;
-
 //!  The abstract character class 
 /*!
   This class is the base for the main character and the NPC. It contains all the functions
@@ -40,31 +37,6 @@ public:
 	double getHunger() { return Hunger; }
 	double setHunger(int newHunger) { return Hunger = newHunger; }
 
-	//Cell checking functions
-	//! Checks whether a cell is a room
-	bool isCellARoom(int x, int y);
-	//! Checks whether a cell is a door
-	bool isCellADoor(int x, int y);
-	//! Gets the oxygen level of a given room
-	int getOxygenLevel(int x, int y);
-	//! Checks whether the player has won
-	bool reachedGoal(int x, int y);
-	//! Checks wether the npc has objective
-	bool hasObjective = false;
-	//! Checks whether the character is wandering
-	bool isWandering = false;
-	// Checks the keyboard input and sets a direction based on it
-	void chooseDirection(const Uint8* keyboardState);
-	//! Changes the character's X and Y value depending on the player's input
-	void moveCharacter(const Uint8* keyboardState);
-
-
-	
-	
-	//! An shared pointer to the character's state.
-	std::shared_ptr<CharacterState> state;
-	//! Shared pointer to the Level loaded in SpaceGame
-	std::shared_ptr<Level> currentRoom;
 	
 	//! A double for the character's health
 	double health = 100;
@@ -72,31 +44,17 @@ public:
 	double charactersOxygenReserves = 100;
 	//! Boolean for whether character is alive
 	bool isAlive = true; 
-	bool hasWon = false;
-	//! Integer for the random direction
-	/*!
-		Direction is used to decide the diretion the character 
-		will move in when in the wandering state
-	*/
-	int direction = 1;
-	//! Integer to store time spent in a state
-	double timer = 0;
-	//! Integers for the different movement speeds
-	int suffocatingSpeed = 1, wanderSpeed = 2, walkSpeed = 3, runSpeed = 3;
-	//! The three oxygen levels that are used to change alter Character's state
-	int lowOxygenThershold = 40, acceptableOxygenLevel = 50, dangeroursOxygenLevel = 20;
-	//! Window size decided by SpaceGame window size
-	int windowWidth = 1920, windowHeight = 1080;
 
 private:
 	//! Integers for the character's X and Y position
-	int x = windowWidth / 2; int y = windowHeight / 2;
+	int x = 0; int y = 0;
 	//! Integer for the character's size when rendered
 	int size = 25;
 	//! Integer for the characters current speed
-	int speed = 3; 
-
+	int speed = 3;
+	//! Double to store character hunger
 	double Hunger = 100;
+	//! Integer to store character tiredness
 	int Tiredness = 0;
 };
 

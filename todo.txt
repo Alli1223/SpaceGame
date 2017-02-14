@@ -1,0 +1,22 @@
+oxygen compressor(stores oxygen)
+hydroponics(produces oxygen and food)
+decompression(objects move about.
+automatic doors
+each room spawns with different items
+space farming
+
+DO NOT WORK ON UNPRODUCTIVE TASKS
+
+automatic door class
+
+toilet counter
+
+Large WORLD
+
+ships instance
+
+items class : oxygen compressor
+
+items class makes items be effected by oxygen class
+
+(can buy npcs to work for you)
